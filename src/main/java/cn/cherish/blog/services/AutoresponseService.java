@@ -56,19 +56,28 @@ public class AutoresponseService extends  ABaseService<Autoresponse, Long>{
 				message = MessageUtil.initNewsMessage(toUserName, fromUserName);
 			}else if("3".equals(content)){
                 Autoresponse translate = autoresponseDao.findByKeyword("translate");
-                message = MessageUtil.initText(toUserName, fromUserName, translate != null ?translate.getMessage():"对不起！翻译功能未完善！");
+                message = MessageUtil.initText(toUserName, fromUserName, translate != null ?translate.getMessage()+"":"对不起！翻译功能未完善！");
 			}else if("4".equals(content)){
 				message = MessageUtil.initImageMessage(toUserName, fromUserName);
 			}else if("5".equals(content)){
 				message = MessageUtil.initMusicMessage(toUserName, fromUserName);
+            }else if("6".equals(content)){
+                message = MessageUtil.initText(toUserName, fromUserName,"快递查询（输入快递单号，例如：快递1000745320654）");
+            }else if(content.startsWith("快递")){
+                String expNo = content.replaceAll("^快递", "").trim();
+                if("".equals(expNo)){
+                    message = MessageUtil.initText(toUserName, fromUserName, "快递查询（输入快递单号，例如：快递1000745320654）");
+                }else{
+                    message = MessageUtil.initText(toUserName, fromUserName, WeixinMsgUtil.queryShipper(expNo));
+                }
 			}else if("?".equals(content) || "？".equals(content) || "help".equals(content)){
                 Autoresponse help = autoresponseDao.findByKeyword("help");
-                message = MessageUtil.initText(toUserName, fromUserName, help != null ?help.getMessage():"有什么可以帮到您的呢！");
+                message = MessageUtil.initText(toUserName, fromUserName, help != null ?help.getMessage()+"":"有什么可以帮到您的呢！");
 			}else if(content.startsWith("翻译")){//^翻译 指以"翻译"开头的字符串
 				String word = content.replaceAll("^翻译", "").trim();
 				if("".equals(word)){
                     Autoresponse translate = autoresponseDao.findByKeyword("translate");
-					message = MessageUtil.initText(toUserName, fromUserName, translate != null ?translate.getMessage():"对不起！翻译功能未完善！");
+					message = MessageUtil.initText(toUserName, fromUserName, translate != null ?translate.getMessage()+"":"对不起！翻译功能未完善！");
 				}else{
 					message = MessageUtil.initText(toUserName, fromUserName, WeixinMsgUtil.baduiTranslate(word));
 				}
@@ -80,12 +89,12 @@ public class AutoresponseService extends  ABaseService<Autoresponse, Long>{
 
                 Autoresponse byKeyword = autoresponseDao.findByKeyword(content);
 				if (byKeyword != null) {
-					String returnMsg = byKeyword.getMessage();
+					String returnMsg = byKeyword.getMessage()+"";
 					String returnMsgType = byKeyword.getMsgType();
 					message = MessageUtil.initText(toUserName, fromUserName, returnMsg);
 				}else{
                     Autoresponse help = autoresponseDao.findByKeyword("help");
-                    message = MessageUtil.initText(toUserName, fromUserName, help != null ?help.getMessage():"你输入了----》" + content);
+                    message = MessageUtil.initText(toUserName, fromUserName, help != null ?help.getMessage()+"":"你输入了----》" + content);
 				}
 			}
 
@@ -93,7 +102,7 @@ public class AutoresponseService extends  ABaseService<Autoresponse, Long>{
 			String eventType = msgMap.get("Event");
 			if(MessageUtil.MESSAGE_SUBSCRIBE.equals(eventType)){//关注
                 Autoresponse subscribe = autoresponseDao.findByKeyword("subscribe");
-                message = MessageUtil.initText(toUserName, fromUserName, subscribe != null ?subscribe.getMessage():"欢迎关注！");
+                message = MessageUtil.initText(toUserName, fromUserName, subscribe != null ?subscribe.getMessage()+"":"欢迎关注！");
 			}else if(MessageUtil.MESSAGE_CLICK.equals(eventType)){//点击
 				message = MessageUtil.initText(toUserName, fromUserName, "点击了啥？");
 			}else if(MessageUtil.MESSAGE_VIEW.equals(eventType)){

@@ -1,6 +1,7 @@
 package cn.cherish.blog.utils;
 
 import cn.cherish.blog.weixin4j.WeixinConfig;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -237,5 +238,48 @@ public class WeixinMsgUtil {
     public static String queryWeather(String city) {
 		return WeatherUtil.queryByCity(city);
     }
+
+	public static String queryShipper(String expNo) {//1000745320654
+
+	    StringBuilder sb = new StringBuilder(128);
+		String result = "查询出错！请确认单号是否正确！";
+		try {
+			result = KdApiOrderDistinguish.getOrderTracesByJson(expNo);
+			if(result.indexOf("true") > 0){
+				//查到了单号
+                KdApiOrderDistinguish kdApiOrderDistinguish = JSON.parseObject(result, KdApiOrderDistinguish.class);
+				try {
+                    List<KdApiOrderDistinguish.ShippersBean> shippers = kdApiOrderDistinguish.getShippers();
+                    for (int i = 0; i < shippers.size(); i++) {
+                        KdApiOrderDistinguish.ShippersBean shipper = shippers.get(i);
+                        String shipperName = shipper.getShipperName();
+                        result = KdniaoTrackQueryAPI.getOrderTracesByJson(shipper.getShipperCode(), expNo);
+                        if(result.indexOf("true") > 0){
+                            KdniaoTrackQueryAPI kdniaoTrackQueryAPI = JSON.parseObject(result, KdniaoTrackQueryAPI.class);
+                            if (kdniaoTrackQueryAPI.getState() > 0){
+                                sb.append(shipperName + ":\r\n");
+                                for (KdniaoTrackQueryAPI.TracesBean traces : kdniaoTrackQueryAPI.getTraces()){
+                                    sb.append(traces.getAcceptTime()+traces.getAcceptStation() + ":\r\n");
+                                }
+                                sb.append("\r\n");
+                            }
+                        }
+                    }
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+            sb = new StringBuilder("查询出错！请确认单号是否正确！");
+		}
+
+		return sb.toString();
+	}
+
+    /*public static void main(String[] args) {
+        queryShipper("1000745320654");
+    }*/
 
 }
