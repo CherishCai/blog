@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+	<meta name="description" content="蔡鸿文的个人网站-博客，一个IT男的世界，欢迎入侵！"/>
+	<meta name="keyword" content="蔡鸿文,个人网站,博客,IT男"/>
+	<meta name="author" content="Cherish"/>
+	
+	<title>Cherish you</title>
+    <script>
+        if(top.location!=self.location)top.location=self.location;
+    </script>
+
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+	<link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link th:href="@{/css/index.css}" href="../static/css/index.css" rel="stylesheet"/>
+</head>
+<body>
+
+	<!-- Header Area -->
+	<div id="top" class="header">
+		<div class="vert-text">
+			<img class="img-circle" id="logo" alt="Company Logo" src="../static/image/logo.jpg" />
+			<h2>
+				<em>Cherish Cai</em>
+			</h2>
+			<ul class="list-inline">
+				<li><i class="fa fa-mars fa-3x"></i></li>
+				<li><i class="fa fa-wechat fa-3x"></i></li>
+				<li><i class="fa fa-qq fa-3x"></i></li>
+				<li><i class="fa fa-github fa-3x"></i></li>
+				<li><i class="fa fa-google-plus fa-3x"></i></li>
+				<li><i class="fa fa-stack-overflow fa-3x"></i></li>
+				<li><i class="fa fa-windows fa-3x"></i></li>
+			</ul>
+			<br> 
+			<a href="#about" class="btn btn-top" aria-label="down to about">
+				<i class="fa fa-hand-o-down fa-3x"></i>
+			</a>
+		</div>
+	</div>
+	<!-- /Header Area -->
+	<div id="nav">
+		<!-- Navigation -->
+		<nav class="navbar navbar-new" role="navigation">
+			<div class="container">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse"
+						data-target="#mobilemenu">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a href="#top"><img class="img-circle img-little" id="myself" alt="head portrait" src="../static/image/myself.jpg" /></a>
+					<a href="#top" class="navbar-brand">&nbsp;&nbsp;Cherish</a>
+				</div>
+				<div class="collapse navbar-collapse" id="mobilemenu">
+
+					<ul class="nav navbar-nav navbar-right text-center">
+						<li><a href="#top"><i class="service-icon fa fa-home"></i>&nbsp;Home</a></li>
+						<li><a href="#about"><i class="service-icon fa fa-info"></i>&nbsp;About</a></li>
+						<li><a href="#cooltimer"><i class="service-icon fa fa-spinner"></i>&nbsp;Timer</a></li>
+						<li><a href="#services"><i class="service-icon fa fa-heart"></i>&nbsp;Blog</a></li>
+						<li><a href="#portfolio"><i class="service-icon fa fa-camera"></i>&nbsp;Portfolio</a></li>
+						<li><a href="#contact"><i class="service-icon fa fa-envelope"></i>&nbsp;Contact</a></li>
+					</ul>
+				</div>
+				<!-- /.navbar-collapse -->
+			</div>
+		</nav>
+		<!-- /Navigation -->
+	</div>
+	<!-- About -->
+	<div id="about" class="about_us">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center">
+					<h2>About Me</h2>
+					<p class="lead">
+						一名普通人类，有朝一日会毁灭地球！<br>
+						while(true)<br>
+						System.out.println("爱你");<br>
+						if("You love me".equals("You Hate me"))<br>
+						System.out.println("朋友");<br>
+						else<br>
+						System.out.println("好人卡");
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /About -->
+	
+	<!-- cooltimer -->
+	<div id="cooltimer" class="cool_timer">
+		<canvas id="canvas" style="height:100%">
+	        	当前浏览器不支持Canvas，请更换浏览器后再试
+	    </canvas>
+	
+	    <script src="../static/js/digit.js"></script>
+	    <script src="../static/js/countdown.js"></script>
+	</div>
+	<!-- /cooltimer -->
+
+	<!-- Services -->
+	<div id="services" class="services">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 col-md-offset-4 text-center">
+					<h2>Blog Blog Blog</h2>
+					<hr>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4 text-center">
+					<div class="service-item">
+						<i class="service-icon fa fa-camera-retro fa-3x"></i>
+						<h3>技术</h3>
+						<p>技术文章，个人学习经历以及抄袭<a href="/blog?type=skill"></a></p>
+					</div>
+				</div>
+				<div class="col-md-4 text-center">
+					<div class="service-item">
+						<i class="service-icon fa fa-camera fa-3x"></i>
+						<h3>生活</h3>
+						<p>生活多姿多彩，怎能缺少<a href="/blog?type=life"></a></p>
+					</div>
+				</div>
+				<div class="col-md-4 text-center">
+					<div class="service-item">
+						<i class="service-icon fa fa-globe fa-3x"></i>
+						<h3>技术 &amp; 生活</h3>
+						<p>技术源于生活，生活高于技术<a href="/blog?type=all"></a></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /Services -->
+
+	<!-- Portfolio -->
+	<div id="portfolio" class="portfolio">
+		<div class="container">
+			<div class="row push50">
+				<div class="col-md-4 col-md-offset-4 text-center">
+					<h2>Our Work</h2>
+					<h3>
+						<span class="filter label label-default" data-filter="all">ALL</span>
+						<span class="filter label label-default" data-filter="bw">B&amp;W</span>
+						<span class="filter label label-default" data-filter="nature">Nature</span>
+						<span class="filter label label-default" data-filter="portraits">Portraits</span>
+					</h3>
+					<hr>
+				</div>
+			</div>
+
+			<div class="row">
+
+				<div class="gallery">
+
+					<ul id="Grid" class="gcontainer">
+						<li class="col-md-4 col-sm-4 col-xs-12 mix bw portraits"
+							data-cat="graphics"><a data-toggle="modal"
+							data-target="#portrait1" class="mix-cover"> <img
+								class="horizontal" src="../static/image/portrait1-sm.jpg" alt="placeholder">
+								<span class="overlay"><span class="valign"></span><span
+									class="title">Portrait 1</span></span>
+						</a></li>
+						<li class="col-md-4 col-sm-4 col-xs-12 mix portraits"
+							data-cat="graphics"><a data-toggle="modal"
+							data-target="#portrait2" class="mix-cover"> <img
+								class="horizontal" src="../static/image/portrait2.jpg" alt="placeholder">
+								<span class="overlay"><span class="valign"></span><span
+									class="title">Portrait 2</span></span>
+						</a></li>
+						<li class="col-md-4 col-sm-4 col-xs-12 mix nature"
+							data-cat="nature"><a data-toggle="modal"
+							data-target="#nature1" class="mix-cover"> <img
+								class="horizontal" src="../static/image/nature1.jpg" alt="placeholder">
+								<span class="overlay"><span class="valign"></span><span
+									class="title">Nature 1</span></span>
+						</a></li>
+						<li class="col-md-4 col-sm-4 col-xs-12 mix portraits"
+							data-cat="portraits"><a data-toggle="modal"
+							data-target="#portrait3" class="mix-cover"> <img
+								class="horizontal" src="../static/image/portrait3.jpg" alt="placeholder">
+								<span class="overlay"><span class="valign"></span><span
+									class="title">Portrait 3</span></span>
+						</a></li>
+						<li class="col-md-4 col-sm-4 col-xs-12 mix portraits"
+							data-cat="portraits"><a data-toggle="modal"
+							data-target="#portrait5" class="mix-cover"> <img
+								class="horizontal" src="../static/image/portrait5.jpg" alt="placeholder">
+								<span class="overlay"><span class="valign"></span><span
+									class="title">Portrait 5</span></span>
+						</a></li>
+						<li class="col-md-4 col-sm-4 col-xs-12 mix nature"
+							data-cat="nature"><a data-toggle="modal"
+							data-target="#nature" class="mix-cover"> <img
+								class="horizontal" src="../static/image/nature.jpg" alt="placeholder">
+								<span class="overlay"><span class="valign"></span><span
+									class="title">Nature</span></span>
+						</a></li>
+						<li class="col-md-4 col-sm-4 col-xs-12 mix portraits"
+							data-cat="portrait"><a data-toggle="modal"
+							data-target="#portrait4" class="mix-cover green"> <img
+								class="vertical" src="../static/image/portrait4.jpg" alt="portrait 4">
+								<span class="overlay"><span class="valign"></span><span
+									class="title">Portrait 4</span></span>
+						</a></li>
+						<li class="col-md-4 col-sm-4 col-xs-12 mix bw nature all"
+							data-cat="portrait"><a data-toggle="modal"
+							data-target="#forest" class="mix-cover green"> <img
+								class="vertical" src="../static/image/forest.jpg" alt="Forest"> <span
+								class="overlay"><span class="valign"></span><span
+									class="title">Forest</span></span>
+						</a></li>
+						<li class="col-md-4 col-sm-4 col-xs-12 mix bw nature all"
+							data-cat="bw"><a data-toggle="modal" data-target="#bw1"
+							class="mix-cover green"> <img class="vertical"
+														  src="../static/image/bw1.jpg" alt="Black and White"> <span
+								class="overlay"><span class="valign"></span><span
+									class="title">Black &amp; White</span></span>
+						</a></li>
+					</ul>
+
+					<!-- Load Photo in Modal -->
+					<div class="modal fade" id="portrait1" tabindex="-1" role="dialog"
+						aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">&times;</button>
+									<h4 class="modal-title text-center">Portrait 1</h4>
+								</div>
+								<div class="modal-body">
+									<img class="thumbnail" alt="Portrait1" src="../static/image/portrait1.jpg" />
+								</div>
+							</div>
+							<!-- /.modal-content -->
+						</div>
+						<!-- /.modal-dialog -->
+					</div>
+					<!-- /.modal -->
+
+					<div class="modal fade" id="portrait2" tabindex="-1" role="dialog"
+						aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">&times;</button>
+									<h4 class="modal-title text-center">Portrait 2</h4>
+								</div>
+								<div class="modal-body">
+									<img class="thumbnail" alt="Portrait1" src="../static/image/portrait2.jpg" />
+								</div>
+							</div>
+							<!-- /.modal-content -->
+						</div>
+						<!-- /.modal-dialog -->
+					</div>
+					<!-- /.modal -->
+
+					<div class="modal fade" id="portrait3" tabindex="-1" role="dialog"
+						aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">&times;</button>
+									<h4 class="modal-title text-center">Portrait 3</h4>
+								</div>
+								<div class="modal-body">
+									<img class="thumbnail" alt="Portrait1" src="../static/image/portrait3.jpg" />
+								</div>
+							</div>
+							<!-- /.modal-content -->
+						</div>
+						<!-- /.modal-dialog -->
+					</div>
+					<!-- /.modal -->
+
+					<div class="modal fade" id="portrait4" tabindex="-1" role="dialog"
+						aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">&times;</button>
+									<h4 class="modal-title text-center">Portrait 4</h4>
+								</div>
+								<div class="modal-body">
+									<img class="thumbnail" alt="Portrait1" src="../static/image/portrait4.jpg" />
+								</div>
+							</div>
+							<!-- /.modal-content -->
+						</div>
+						<!-- /.modal-dialog -->
+					</div>
+					<!-- /.modal -->
+
+					<div class="modal fade" id="portrait5" tabindex="-1" role="dialog"
+						aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">&times;</button>
+									<h4 class="modal-title text-center">Portrait 5</h4>
+								</div>
+								<div class="modal-body">
+									<img class="thumbnail" alt="Portrait1" src="../static/image/portrait5.jpg" />
+								</div>
+							</div>
+							<!-- /.modal-content -->
+						</div>
+						<!-- /.modal-dialog -->
+					</div>
+					<!-- /.modal -->
+
+					<div class="modal fade" id="nature" tabindex="-1" role="dialog"
+						aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">&times;</button>
+									<h4 class="modal-title text-center">Nature</h4>
+								</div>
+								<div class="modal-body">
+									<img class="thumbnail" alt="nature" src="../static/image/nature.jpg" />
+								</div>
+							</div>
+							<!-- /.modal-content -->
+						</div>
+						<!-- /.modal-dialog -->
+					</div>
+					<!-- /.modal -->
+
+					<div class="modal fade" id="nature1" tabindex="-1" role="dialog"
+						aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">&times;</button>
+									<h4 class="modal-title text-center">Nature 1</h4>
+								</div>
+								<div class="modal-body">
+									<img class="thumbnail" alt="nature" src="../static/image/nature1.jpg" />
+								</div>
+							</div>
+							<!-- /.modal-content -->
+						</div>
+						<!-- /.modal-dialog -->
+					</div>
+					<!-- /.modal -->
+
+
+					<div class="modal fade" id="forest" tabindex="-1" role="dialog"
+						aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">&times;</button>
+									<h4 class="modal-title text-center">Forest</h4>
+								</div>
+								<div class="modal-body">
+									<img class="thumbnail" alt="forest" src="../static/image/forest.jpg" />
+								</div>
+							</div>
+							<!-- /.modal-content -->
+						</div>
+						<!-- /.modal-dialog -->
+					</div>
+					<!-- /.modal -->
+
+					<div class="modal fade" id="bw1" tabindex="-1" role="dialog"
+						aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">&times;</button>
+									<h4 class="modal-title text-center">Black and White</h4>
+								</div>
+								<div class="modal-body">
+									<img class="thumbnail" alt="forest" src="../static/image/bw1.jpg" />
+								</div>
+							</div>
+							<!-- /.modal-content -->
+						</div>
+						<!-- /.modal-dialog -->
+					</div>
+					<!-- /.modal -->
+
+
+					<!-- /Load Photo in Modal -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /Portfolio -->
+	<!-- Contact -->
+	<div id="contact">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 col-md-offset-4 text-center">
+					<h2>Contact Me</h2>
+					<hr>
+				</div>
+				<div class="col-md-5 col-md-offset-3">
+					<!-- contact form starts -->
+					<form action="/contactMe" id="contact-form" class="form-horizontal" method="post">
+						<fieldset>
+							<div class="form-group">
+								<label class="col-sm-4 control-label" for="name">Your Name</label>
+								<div class="col-sm-8">
+									<input type="text" placeholder="Your Name" class="form-control"
+										name="name" id="name">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label" for="email">Email Address</label>
+								<div class="col-sm-8">
+									<input type="text" placeholder="Enter Your Email Address"
+										class="form-control" name="email" id="email">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label" for="subject">Subject</label>
+								<div class="col-sm-8">
+									<input type="text" placeholder="Subject" class="form-control"
+										name="subject" id="subject">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label" for="message">Your Message</label>
+								<div class="col-sm-8">
+									<textarea placeholder="Please Type Your Message"
+										class="form-control" name="message" id="message" rows="3"></textarea>
+								</div>
+							</div>
+							<div class="col-sm-offset-4 col-sm-8">
+								<button type="submit" class="btn btn-success">Submit</button>
+								<button type="reset" class="btn btn-primary">Cancel</button>
+							</div>
+						</fieldset>
+					</form>
+
+					<!-- contact form ends -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /Contact -->
+	<!-- Footer -->
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3 text-center">
+					<h2>Thank You</h2>
+					<em>Copyright&nbsp;&copy;&nbsp;Cherish&nbsp;2016&nbsp;粤ICP备16047166号</em>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- /Footer -->
+
+
+	<!--  js  -->
+    <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="../static/js/jquery-scrolltofixed-min.js" type="text/javascript"></script>
+	<script src="../static/js/jquery.vegas.js" type="text/javascript"></script>
+	<script src="../static/js/jquery.mixitup.min.js" type="text/javascript"></script>
+    <script src="http://cdn.bootcss.com/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+	<script src="../static/js/index.js" type="text/javascript"></script>
+
+	<!-- 它过于慢，留作最后加载 -->
+	<link rel="stylesheet" type="text/css"
+		href="https://fonts.googleapis.com/css?family=Indie+Flower" />
+</body>
+
+</html>
