@@ -1,7 +1,6 @@
 package cn.cherish.blog.utils;
 
 import com.alibaba.fastjson.JSONObject;
-import com.sun.tools.javac.util.Assert;
 import org.apache.commons.codec.binary.Base64;
 
 import javax.crypto.Cipher;
@@ -38,13 +37,10 @@ public class TulingUtil {
     }*/
 
     public static String askWithUserId(String info, String userid){
-        Assert.checkNonNull(info, "info不可为空！");
-        Assert.checkNonNull(userid, "userid不可为空！");
         return askTuling("{\"key\":\""+apiKey+"\",\"info\":\""+info+"\",\"userid\":\""+userid+"\"}");
     }
 
     public static String askJustInfo(String info){
-        Assert.checkNonNull(info, "info不可为空！");
         return askTuling("{\"key\":\"" + apiKey + "\",\"info\":\"" + info + "\"}");
     }
 

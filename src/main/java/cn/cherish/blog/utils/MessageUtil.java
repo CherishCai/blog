@@ -36,7 +36,7 @@ public class MessageUtil {
     public static final String MESSAGE_VIEW = "VIEW";
     public static final String MESSAGE_SCANCODE= "scancode_push";
 
-    public static String HELP = "菜单如下：\r\n1 天气查询\n2 开发人员介绍\n3 翻译功能\n4 图文消息\n5 音乐\n6 快递查询\n7 Cherish博客";
+    public static String HELP = "菜单如下：\r\n1 天气查询\n2 开发人员介绍\n3 翻译功能\n4 图文消息\n5 音乐\n6 快递查询\n7 Cherish博客\n9 智能聊天模式";
     public static String WEATHER = "天气查询（例如：天气广州，城市名称，国内城市支持中英文，国际城市支持英文）";
     public static String TRANSLATRE = "翻译功能的使用\r\n例如：翻译珍惜(或翻译cherish)";
     public static String EXPRESSAGE = "快递查询（输入快递单号，\r\n例如：快递418139779609）";
