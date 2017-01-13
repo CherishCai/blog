@@ -22,7 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
                 .antMatchers("/","/login","/validateCode","/**/favicon.ico",
                         "/static/**", "/css/**", "/js/**", "/image/**", "/tools/**",
-                        "/autoresponse/message","/api/**","/blog/**","/imageDownload*","/imageUpload*").permitAll()
+                        "/weui/**","/api/**","/blog/**","/imageDownload*").permitAll()
                 .anyRequest().permitAll()//允许所有
                 .and()
             .formLogin()

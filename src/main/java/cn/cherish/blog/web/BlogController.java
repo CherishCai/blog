@@ -2,6 +2,7 @@ package cn.cherish.blog.web;
 
 import cn.cherish.blog.entity.Article;
 import cn.cherish.blog.services.ArticleService;
+import cn.cherish.blog.utils.CheckMobile;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,11 +27,15 @@ public class BlogController extends ABaseController{
 
 	@GetMapping
 	public ModelAndView list(
-	        @RequestParam(required = false,defaultValue = "") Integer title,
-             @RequestParam(required = false,defaultValue = "0") Integer startIndex,
-             @RequestParam(required = false,defaultValue = "20") Integer pageSize) {
+			@RequestParam(required = false,defaultValue = "") Integer title,
+			@RequestParam(required = false,defaultValue = "0") Integer startIndex,
+			@RequestParam(required = false,defaultValue = "20") Integer pageSize
+			, HttpServletRequest request) {
 	    //&startIndex=0&pageSize=20
 		ModelAndView modelAndView = new ModelAndView("blog/list");
+		if (CheckMobile.check(request.getHeader( "USER-AGENT" ).toLowerCase())) {
+			modelAndView.setViewName("mobile/list");//手机端页面
+		}
 
 		try {
 			Map<String, Object> searchParams = new HashMap<>();
@@ -47,19 +53,18 @@ public class BlogController extends ABaseController{
 	}
 
     @GetMapping("/detail")
-    public ModelAndView detailA(@RequestParam Long id) {
+    public String  detailA(@RequestParam Long id) {
 
-        ModelAndView modelAndView = new ModelAndView("blog/detail");
-
-        Article article = articleService.findById(id);
-        modelAndView.addObject(article);
-        return modelAndView;
+        return "redirect:/blog/" + id;//跳转到下面那个路径
     }
 
 	@GetMapping("/{articleId}")
-	public ModelAndView detail(@PathVariable Long articleId) {
+	public ModelAndView detail(@PathVariable Long articleId, HttpServletRequest request) {
 
 		ModelAndView modelAndView = new ModelAndView("blog/detail");
+        if (CheckMobile.check(request.getHeader( "USER-AGENT" ).toLowerCase())) {
+            modelAndView.setViewName("mobile/detail");//手机端页面
+        }
 
 		Article article = articleService.findById(articleId);
 		modelAndView.addObject(article);

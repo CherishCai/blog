@@ -36,6 +36,13 @@ public class MessageUtil {
     public static final String MESSAGE_VIEW = "VIEW";
     public static final String MESSAGE_SCANCODE= "scancode_push";
 
+    public static String HELP = "菜单如下：\r\n1 天气查询\n2 开发人员介绍\n3 翻译功能\n4 图文消息\n5 音乐\n6 快递查询\n7 Cherish博客";
+    public static String WEATHER = "天气查询（例如：天气广州，城市名称，国内城市支持中英文，国际城市支持英文）";
+    public static String TRANSLATRE = "翻译功能的使用\r\n例如：翻译珍惜(或翻译cherish)";
+    public static String EXPRESSAGE = "快递查询（输入快递单号，\r\n例如：快递418139779609）";
+    public static String SUBSCRIBE = "您的关注，终于等到你，请输入help查看菜单";
+    public static String TULING = "聊天功能（开启：chat，关闭：close）";
+
     /**
      * xml转为map集合
      * @param request
@@ -47,7 +54,7 @@ public class MessageUtil {
 
         InputStream ins = request.getInputStream();
 
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         SAXReader reader = new SAXReader();
 
         Document doc = reader.read(ins);
@@ -105,18 +112,6 @@ public class MessageUtil {
         return sb.toString();
     }
 
-    public static String firstMenu(){
-        StringBuffer sb = new StringBuffer();
-        sb.append("开发微信公众号，玩玩，期待功能完善！\n谢谢！");
-        return sb.toString();
-    }
-
-    public static String secondMenu(){
-        StringBuffer sb = new StringBuffer();
-        sb.append("蔡梦缘呀！谢谢");
-        return sb.toString();
-    }
-
     public static String threeMenu(){
         StringBuffer sb = new StringBuffer();
         sb.append("词组翻译使用指南\n\n");
@@ -166,9 +161,100 @@ public class MessageUtil {
      * @param fromUserName
      * @return
      */
+    public static String initImgTextMessage(String toUserName, String fromUserName, String content, String url){
+        List<News> newsList = new ArrayList<>();
+        NewsMessage newsMessage = new NewsMessage();
+
+        News news = new News();
+        news.setTitle(content);
+        news.setDescription(content);
+        news.setPicUrl(url);
+        news.setUrl(url);
+
+        newsList.add(news);
+
+        newsMessage.setToUserName(fromUserName);
+        newsMessage.setFromUserName(toUserName);
+        newsMessage.setCreateTime(new Date().getTime());
+        newsMessage.setMsgType(MESSAGE_NEWS);
+        newsMessage.setArticles(newsList);
+        newsMessage.setArticleCount(newsList.size());
+
+        return newsMessageToXml(newsMessage);
+    }
+
+    /**
+     * 图灵新闻回复
+     * @param toUserName
+     * @param fromUserName
+     */
+    public static String initTuLingNewsMessage(String toUserName, String fromUserName, List<TulingUtil.NewsBean.ListBean> list){
+        List<News> newsList = new ArrayList<>();
+        NewsMessage newsMessage = new NewsMessage();
+
+        News news = null;
+        for (int i = 0; i < list.size(); i++) {
+            TulingUtil.NewsBean.ListBean tulingNews = list.get(i);
+
+            news = new News();
+            news.setTitle(tulingNews.getSource());
+            news.setDescription(tulingNews.getArticle());
+            news.setPicUrl(tulingNews.getIcon());
+            news.setUrl(tulingNews.getDetailurl());
+
+            newsList.add(news);
+        }
+
+        newsMessage.setToUserName(fromUserName);
+        newsMessage.setFromUserName(toUserName);
+        newsMessage.setCreateTime(new Date().getTime());
+        newsMessage.setMsgType(MESSAGE_NEWS);
+        newsMessage.setArticles(newsList);
+        newsMessage.setArticleCount(newsList.size());
+
+        return newsMessageToXml(newsMessage);
+    }
+
+    /**
+     * 图灵菜谱回复
+     * @param toUserName
+     * @param fromUserName
+     */
+    public static String initTuLingCookMessage(String toUserName, String fromUserName, List<TulingUtil.CookbookBean.ListBean> list){
+        List<News> newsList = new ArrayList<>();
+        NewsMessage newsMessage = new NewsMessage();
+
+        News news = null;
+        for (int i = 0; i < list.size(); i++) {
+            TulingUtil.CookbookBean.ListBean tulingCook = list.get(i);
+
+            news = new News();
+            news.setTitle(tulingCook.getName());
+            news.setDescription(tulingCook.getInfo());
+            news.setPicUrl(tulingCook.getIcon());
+            news.setUrl(tulingCook.getDetailurl());
+
+            newsList.add(news);
+        }
+
+        newsMessage.setToUserName(fromUserName);
+        newsMessage.setFromUserName(toUserName);
+        newsMessage.setCreateTime(new Date().getTime());
+        newsMessage.setMsgType(MESSAGE_NEWS);
+        newsMessage.setArticles(newsList);
+        newsMessage.setArticleCount(newsList.size());
+
+        return newsMessageToXml(newsMessage);
+    }
+
+    /**
+     * 图文消息的组装
+     * @param toUserName
+     * @param fromUserName
+     * @return
+     */
     public static String initNewsMessage(String toUserName,String fromUserName){
-        String message = null;
-        List<News> newsList = new ArrayList<News>();
+        List<News> newsList = new ArrayList<>();
         NewsMessage newsMessage = new NewsMessage();
 
         News news = new News();
@@ -183,7 +269,7 @@ public class MessageUtil {
         News news2 = new News();
         news2.setTitle("慕课网介绍");
         news2.setDescription("慕课网是垂直的互联网IT技能免费学习网站。以独家视频教程、在线编程工具、学习计划、问答社区为核心特色。在这里，你可以找到最好的互联网技术牛人，也可以通过免费的在线公开视频课程学习国内领先的互联网IT技术。慕课网课程涵盖前端开发、PHP、Html5、Android、iOS、Swift等IT前沿技术语言，包括基础课程、实用案例、高级分享三大类型，适合不同阶段的学习人群。");
-        news2.setPicUrl("http://www.caihongwen.cn/image/love.svg");
+        news2.setPicUrl("http://img.mukewang.com/57a322f00001e4ae02560256-40-40.jpg");
         news2.setUrl("www.imooc.com");
 
         newsList.add(news2);
@@ -195,8 +281,44 @@ public class MessageUtil {
         newsMessage.setArticles(newsList);
         newsMessage.setArticleCount(newsList.size());
 
-        message = newsMessageToXml(newsMessage);
-        return message;
+        return newsMessageToXml(newsMessage);
+    }
+
+    /**
+     * 博客消息的组装
+     * @param toUserName
+     * @param fromUserName
+     * @return
+     */
+    public static String initBlogMessage(String toUserName,String fromUserName){
+        List<News> newsList = new ArrayList<>();
+        NewsMessage newsMessage = new NewsMessage();
+
+        News news = new News();
+        news.setTitle("Cherish博客");
+        news.setDescription("蔡鸿文的个人网站-博客，这边的世界，欢迎入侵！");
+        news.setPicUrl("http://www.caihongwen.cn/image/myself.jpg");
+        news.setUrl("http://www.caihongwen.cn/blog/");
+
+        newsList.add(news);
+
+        //多图文
+        News news2 = new News();
+        news2.setTitle("CSDN博客");
+        news2.setDescription("一名后辈，愿跟上大神的脚步\nCSDN.NET - 全球最大中文IT社区，为IT专业技术人员提供最全面的信息传播和服务平台");
+        news2.setPicUrl("http://avatar.csdn.net/9/B/B/1_caimengyuan.jpg");
+        news2.setUrl("http://blog.csdn.net/caimengyuan/");
+
+        newsList.add(news2);
+
+        newsMessage.setToUserName(fromUserName);
+        newsMessage.setFromUserName(toUserName);
+        newsMessage.setCreateTime(new Date().getTime());
+        newsMessage.setMsgType(MESSAGE_NEWS);
+        newsMessage.setArticles(newsList);
+        newsMessage.setArticleCount(newsList.size());
+
+        return newsMessageToXml(newsMessage);
     }
 
     /**

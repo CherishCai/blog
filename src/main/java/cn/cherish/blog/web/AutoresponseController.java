@@ -3,9 +3,7 @@ package cn.cherish.blog.web;
 import cn.cherish.blog.dto.BasicSearchDto;
 import cn.cherish.blog.entity.Autoresponse;
 import cn.cherish.blog.services.AutoresponseService;
-import cn.cherish.blog.utils.MD5Util;
 import lombok.extern.slf4j.Slf4j;
-import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,10 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,39 +22,6 @@ public class AutoresponseController extends ABaseController {
     @Autowired
     private AutoresponseService autoresponseService;
 
-    /**
-     * 检测token，链接上微信公众号
-     */
-    @GetMapping("/message")
-    public void checkToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        request.setCharacterEncoding("utf-8");
-        response.setCharacterEncoding("utf-8");
-        String signature = request.getParameter("signature");
-        String timestamp = request.getParameter("timestamp");
-        String nonce = request.getParameter("nonce");
-        String echostr = request.getParameter("echostr");
-
-        PrintWriter out = response.getWriter();
-        if (MD5Util.checkSignature(signature, timestamp, nonce)) {
-            out.print(echostr);
-        }
-        out.close();
-    }
-
-    @PostMapping("/message")
-    public void message(HttpServletRequest request, HttpServletResponse response) throws IOException, DocumentException {
-
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        PrintWriter out = response.getWriter();
-
-        String message = autoresponseService.getReturnMsg(request);
-
-        log.debug(message);
-
-        out.print(message);
-        out.close();
-    }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping

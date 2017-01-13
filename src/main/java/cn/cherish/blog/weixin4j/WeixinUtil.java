@@ -11,7 +11,7 @@ import org.apache.http.util.EntityUtils;
 public class WeixinUtil {
 	
 	private static JsonMapper jsonMapper = new JsonMapper();
-	
+
 	/**
 	 * 通过授权的code取得openid
 	 * @param code

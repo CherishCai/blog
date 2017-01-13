@@ -37,13 +37,13 @@ public class WeatherUtil {
 
     private static final String httpUrl = "http://apis.baidu.com/heweather/weather/free";
 
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         //城市名称，国内城市支持中英文，国际城市支持英文
         String content = "天气广州";
         String city = content.replaceAll("^天气", "").trim();
         System.out.println("city=" + city);
         System.out.println(queryByCity(city));
-    }*/
+    }
 
     public static String queryByCity(String city) {
         String result = "不好意思，查无此城！";
@@ -61,9 +61,9 @@ public class WeatherUtil {
 
                 StringBuilder sb = new StringBuilder(512);
                 sb.append("城市："+weatherUtil.basic.getCity()+","+weatherUtil.basic.getCnty());
-
                 if (weatherUtil.aqi != null) {
-                    sb.append(",Pm2.5:"+weatherUtil.aqi.getCity().getPm25() +"\r\n");
+                    AqiBean.CityBean cityBean = weatherUtil.aqi.getCity();
+                    sb.append(",空气质量指数"+cityBean.getAqi()+"·"+cityBean.getQlty()+",Pm2.5为"+cityBean.getPm25()+"微克每立方米\r\n");
                 }else{
                     sb.append("\r\n");
                 }
