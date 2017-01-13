@@ -8,6 +8,9 @@ import cn.cherish.blog.entity.WeixinUser;
 import cn.cherish.blog.repository.WeixinUserDao;
 import cn.cherish.blog.utils.MessageUtil;
 import cn.cherish.blog.utils.WeixinMsgUtil;
+import cn.cherish.blog.weixin4j.UserInfo;
+import cn.cherish.blog.weixin4j.WeixinUtil;
+import cn.cherish.blog.weixinjs.WeixinJs;
 import lombok.extern.slf4j.Slf4j;
 import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -52,7 +56,7 @@ public class WeixinUserService {
             //设置openid
             request.getServletContext().setAttribute(fromUserName,"1");
             //数据库保存想和我聊天的人
-            /*WeixinUser weixinUser = weixinUserDao.findByOpenid(fromUserName);
+            WeixinUser weixinUser = weixinUserDao.findByOpenid(fromUserName);
             if (weixinUser == null || weixinUser.getId() == null) {
                 UserInfo userInfo = WeixinUtil.getUserInfo(fromUserName, WeixinJs.getAccess_token(request.getServletContext()));
                 weixinUser = new WeixinUser();
@@ -66,7 +70,7 @@ public class WeixinUserService {
                 }
                 log.info("openid:" + fromUserName + "执行保存weixinUser到数据库");
                 weixinUserDao.save(weixinUser);
-            }*/
+            }
             return MessageUtil.initText(toUserName, fromUserName, "进入聊天模式");
         }else if ("close".equals(content.trim())){
             request.getServletContext().removeAttribute(fromUserName);

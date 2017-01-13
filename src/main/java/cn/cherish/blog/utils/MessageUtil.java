@@ -2,6 +2,7 @@ package cn.cherish.blog.utils;
 
 import cn.cherish.blog.weixinpo.*;
 import com.thoughtworks.xstream.XStream;
+import org.apache.commons.lang3.StringUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -185,10 +186,10 @@ public class MessageUtil {
 
     /**
      * 图灵新闻回复
-     * @param toUserName
-     * @param fromUserName
+     * @param meId
+     * @param openid
      */
-    public static String initTuLingNewsMessage(String toUserName, String fromUserName, List<TulingUtil.NewsBean.ListBean> list){
+    public static String initTuLingNewsMessage(String meId, String openid, List<TulingUtil.NewsBean.ListBean> list){
         List<News> newsList = new ArrayList<>();
         NewsMessage newsMessage = new NewsMessage();
 
@@ -199,14 +200,15 @@ public class MessageUtil {
             news = new News();
             news.setTitle(tulingNews.getSource());
             news.setDescription(tulingNews.getArticle());
-            news.setPicUrl(tulingNews.getIcon());
+            if (StringUtils.isNotBlank(tulingNews.getIcon()))
+                news.setPicUrl(tulingNews.getIcon());
             news.setUrl(tulingNews.getDetailurl());
 
             newsList.add(news);
         }
 
-        newsMessage.setToUserName(fromUserName);
-        newsMessage.setFromUserName(toUserName);
+        newsMessage.setToUserName(openid);
+        newsMessage.setFromUserName(meId);
         newsMessage.setCreateTime(new Date().getTime());
         newsMessage.setMsgType(MESSAGE_NEWS);
         newsMessage.setArticles(newsList);
@@ -217,10 +219,10 @@ public class MessageUtil {
 
     /**
      * 图灵菜谱回复
-     * @param toUserName
-     * @param fromUserName
+     * @param meId
+     * @param openid
      */
-    public static String initTuLingCookMessage(String toUserName, String fromUserName, List<TulingUtil.CookbookBean.ListBean> list){
+    public static String initTuLingCookMessage(String meId, String openid, List<TulingUtil.CookbookBean.ListBean> list){
         List<News> newsList = new ArrayList<>();
         NewsMessage newsMessage = new NewsMessage();
 
@@ -231,14 +233,15 @@ public class MessageUtil {
             news = new News();
             news.setTitle(tulingCook.getName());
             news.setDescription(tulingCook.getInfo());
-            news.setPicUrl(tulingCook.getIcon());
+            if (StringUtils.isNotBlank(tulingCook.getIcon()))
+                news.setPicUrl(tulingCook.getIcon());
             news.setUrl(tulingCook.getDetailurl());
 
             newsList.add(news);
         }
 
-        newsMessage.setToUserName(fromUserName);
-        newsMessage.setFromUserName(toUserName);
+        newsMessage.setToUserName(openid);
+        newsMessage.setFromUserName(meId);
         newsMessage.setCreateTime(new Date().getTime());
         newsMessage.setMsgType(MESSAGE_NEWS);
         newsMessage.setArticles(newsList);
