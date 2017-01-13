@@ -37,13 +37,13 @@ public class WeatherUtil {
 
     private static final String httpUrl = "http://apis.baidu.com/heweather/weather/free";
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         //城市名称，国内城市支持中英文，国际城市支持英文
         String content = "天气广州";
         String city = content.replaceAll("^天气", "").trim();
         System.out.println("city=" + city);
         System.out.println(queryByCity(city));
-    }
+    }*/
 
     public static String queryByCity(String city) {
         String result = "不好意思，查无此城！";

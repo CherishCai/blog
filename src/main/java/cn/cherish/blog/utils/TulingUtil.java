@@ -27,7 +27,7 @@ public class TulingUtil {
         //图灵网站上的apiKey
         private static final String apiKey = "4c50196c856c4384827e3edc2d958c8c";
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         String info = "鱼香肉丝怎么做";//测试用例
         String userid = "18826137274";
         //待加密的json数据
@@ -35,7 +35,7 @@ public class TulingUtil {
 //        String data = "{\"key\":\""+apiKey+"\",\"info\":\""+info+"\",\"userid\":\""+userid+"\"}";
 //        System.out.println(askTuling(data));
         System.out.println(askWithUserId(info,userid));;
-    }
+    }*/
 
     public static String askWithUserId(String info, String userid){
         Assert.checkNonNull(info, "info不可为空！");
