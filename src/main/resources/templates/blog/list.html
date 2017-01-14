@@ -5,6 +5,8 @@
 <head>
     <meta charset="utf-8"/>
 	<title>博客文章</title>
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <!--<link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>-->
     <style>
         body {
             background: rgba(29, 50, 42, 0.93) url("/image/blogbg.jpg") top center no-repeat;
@@ -19,14 +21,13 @@
         <ul>
             <li th:each="article : ${articles}">
                 <a href="/blog/1" th:href="@{/blog/detail(id=${article.id})}" th:text="${article.title}">标题</a>
+                <p></p>
             </li>
         </ul>
 
 	</div>
 
-    <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
-    <script th:src="@{/js/jquery-1.12.4.js}" type="text/javascript"></script>
-    <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--<script th:src="@{/js/jquery-1.12.4.js}" type="text/javascript"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
 </body>
 </html>

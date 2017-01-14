@@ -23,7 +23,7 @@ public class WeixinUser implements java.io.Serializable {
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
-    @Column(name = "openid", nullable = false, length = 64)
+    @Column(name = "openid", nullable = false, unique = true, length = 64)
     private String openid;
 
     @Column(name = "nickname", length = 64)

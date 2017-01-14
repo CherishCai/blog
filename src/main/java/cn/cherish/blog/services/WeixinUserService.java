@@ -52,7 +52,7 @@ public class WeixinUserService {
         String msgType = msgMap.get("MsgType");
         String content = msgMap.get("Content").trim();
 
-        if ("chat".equals(content.trim())) {
+        if ("chat".equalsIgnoreCase(content.trim())) {
             //设置openid
             request.getServletContext().setAttribute(fromUserName,"1");
             //数据库保存想和我聊天的人
@@ -69,11 +69,10 @@ public class WeixinUserService {
                     weixinUser.setSubscribetime(new Date());
                 }
                 System.out.println("openid:" + fromUserName + "执行保存weixinUser到数据库");
-                System.out.println(weixinUser);
                 weixinUserDao.save(weixinUser);
             }
             return MessageUtil.initText(toUserName, fromUserName, "进入聊天模式");
-        }else if ("close".equals(content.trim())){
+        }else if ("close".equalsIgnoreCase(content.trim())){
             request.getServletContext().removeAttribute(fromUserName);
             return MessageUtil.initText(toUserName, fromUserName, "好的，退出聊天模式");
         }
@@ -127,7 +126,7 @@ public class WeixinUserService {
             //图灵机器人回复
             }else if("9".equals(content) || "智能聊天模式".equals(content) || "聊天".equals(content) || "智能聊天".equals(content)){
                 message = MessageUtil.initText(toUserName, fromUserName, MessageUtil.TULING);
-            }else if("help".equals(content) || "?".equals(content) || "？".equals(content)){
+            }else if("help".equalsIgnoreCase(content) || "?".equals(content) || "？".equals(content)){
                 message = MessageUtil.initText(toUserName, fromUserName, MessageUtil.HELP);
             }else{
                 message = MessageUtil.initText(toUserName, fromUserName, "你输入了-->" + content +"\n请输入help查看菜单");

@@ -21,10 +21,13 @@ import java.util.List;
  * Created by Cherish on 2017/1/13.
  */
 public class TulingUtil {
-        //图灵网站上的secret
-       private static final String secret = "8399a2937f8954b6";
-        //图灵网站上的apiKey
-        private static final String apiKey = "4c50196c856c4384827e3edc2d958c8c";
+
+    //图灵网站上的secret
+    private static final String secret = "8399a2937f8954b6";
+    //图灵网站上的apiKey
+    private static final String apiKey = "4c50196c856c4384827e3edc2d958c8c";
+
+    private static final String url = "http://www.tuling123.com/openapi/api";
 
     /*public static void main(String[] args) {
         String info = "鱼香肉丝怎么做";//测试用例
@@ -36,11 +39,11 @@ public class TulingUtil {
         System.out.println(askWithUserId(info,userid));;
     }*/
 
-    public static String askWithUserId(String info, String userid){
-        return askTuling("{\"key\":\""+apiKey+"\",\"info\":\""+info+"\",\"userid\":\""+userid+"\"}");
+    public static String askWithUserId(String info, String userid) {
+        return askTuling("{\"key\":\"" + apiKey + "\",\"info\":\"" + info + "\",\"userid\":\"" + userid + "\"}");
     }
 
-    public static String askJustInfo(String info){
+    public static String askJustInfo(String info) {
         return askTuling("{\"key\":\"" + apiKey + "\",\"info\":\"" + info + "\"}");
     }
 
@@ -50,7 +53,7 @@ public class TulingUtil {
         String timestamp = String.valueOf(System.currentTimeMillis());
 
         //生成密钥
-        String keyParam = secret+timestamp+apiKey;
+        String keyParam = secret + timestamp + apiKey;
         String aesKey = MD5(keyParam);
 
         //加密
@@ -63,17 +66,17 @@ public class TulingUtil {
         json.put("data", data);
 
         //请求图灵api
-        return SendPost(json.toString(), "http://www.tuling123.com/openapi/api");
+        return SendPost(json.toString(), url);
     }
 
 
     /**
      * 向后台发送post请求
+     *
      * @param param
      * @param url
-     * @return
      */
-    public static String SendPost(String param, String url) {
+    private static String SendPost(String param, String url) {
         OutputStreamWriter out = null;
         BufferedReader in = null;
         String result = "";
@@ -126,12 +129,13 @@ public class TulingUtil {
     /**
      * MD5加密算法
      * 说明：32位加密算法
+     *
      * @param s 待加密的数据
      * @return 加密结果，全小写的字符串
      */
     public static String MD5(String s) {
-        char hexDigits[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-                'a', 'b', 'c', 'd', 'e', 'f' };
+        char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+                'a', 'b', 'c', 'd', 'e', 'f'};
         try {
             byte[] btInput = s.getBytes("utf-8");
             // 获得MD5摘要算法的 MessageDigest 对象
@@ -403,7 +407,7 @@ class Aes {
     /**
      * AES CBC模式使用的Initialization Vector
      */
-    private IvParameterSpec iv = new IvParameterSpec(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 });
+    private IvParameterSpec iv = new IvParameterSpec(new byte[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
     /**
      * Cipher 物件
      */
@@ -411,7 +415,8 @@ class Aes {
 
     /**
      * 构造方法
-     * @param strKey  密钥
+     *
+     * @param strKey 密钥
      */
     public Aes(String strKey) {
         try {
@@ -424,7 +429,7 @@ class Aes {
 
     /**
      * 加密方法
-     *
+     * <p>
      * 说明：采用128位
      *
      * @return 加密结果
@@ -441,7 +446,6 @@ class Aes {
     }
 
     /**
-     *
      * @param algorithm
      * @param text
      * @return
