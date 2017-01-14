@@ -4,7 +4,7 @@ public class UserInfo {
 
 	private String openid;
 	private String nickname;
-	private Integer sex;
+	private Short sex;
 	private String city;
 	private String headimgurl;
 	
@@ -25,11 +25,11 @@ public class UserInfo {
 		this.nickname = nickname;
 	}
 
-	public Integer getSex() {
+	public Short getSex() {
 		return sex;
 	}
 
-	public void setSex(Integer sex) {
+	public void setSex(Short sex) {
 		this.sex = sex;
 	}
 

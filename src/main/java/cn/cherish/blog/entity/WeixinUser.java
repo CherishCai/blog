@@ -26,20 +26,20 @@ public class WeixinUser implements java.io.Serializable {
     @Column(name = "openid", nullable = false, length = 64)
     private String openid;
 
-    @Column(name = "nickname", nullable = false, length = 64)
+    @Column(name = "nickname", length = 64)
     private String nickname;
 
-    @Column(name = "sex", nullable = false)
+    @Column(name = "sex")
     private Short sex;
 
-    @Column(name = "city", nullable = false, length = 64)
+    @Column(name = "city", length = 64)
     private String city;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="UTC")
     @Column(name = "subscribetime", length = 19)
     private Date subscribetime;
 
-    @Column(name = "headimgurl", nullable = false, length = 128)
+    @Column(name = "headimgurl", length = 128)
     private String headimgurl;
 
 

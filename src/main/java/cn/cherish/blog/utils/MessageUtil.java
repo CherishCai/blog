@@ -194,12 +194,13 @@ public class MessageUtil {
         NewsMessage newsMessage = new NewsMessage();
 
         News news = null;
-        for (int i = 0; i < list.size(); i++) {
+        int len = list.size() > 8 ? 8 : list.size();
+        for (int i = 0; i < len; i++) {
             TulingUtil.NewsBean.ListBean tulingNews = list.get(i);
 
             news = new News();
-            news.setTitle(tulingNews.getSource());
-            news.setDescription(tulingNews.getArticle());
+            news.setTitle(tulingNews.getArticle());
+            news.setDescription(tulingNews.getSource());
             if (StringUtils.isNotBlank(tulingNews.getIcon()))
                 news.setPicUrl(tulingNews.getIcon());
             news.setUrl(tulingNews.getDetailurl());
@@ -227,7 +228,8 @@ public class MessageUtil {
         NewsMessage newsMessage = new NewsMessage();
 
         News news = null;
-        for (int i = 0; i < list.size(); i++) {
+        int len = list.size() > 8 ? 8 : list.size();
+        for (int i = 0; i < len; i++) {
             TulingUtil.CookbookBean.ListBean tulingCook = list.get(i);
 
             news = new News();

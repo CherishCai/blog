@@ -375,7 +375,7 @@ public class WeixinMsgUtil {
     }
 
     public static String askTuLing(String me, String openid, String info){
-        String tulingJson = TulingUtil.askWithUserId(info, openid);
+        String tulingJson = TulingUtil.askWithUserId(info, openid.substring(0,10).toLowerCase());
         System.out.println("tulingJson = " + tulingJson);
 
         if (tulingJson.indexOf("100000") > 0){//文本类

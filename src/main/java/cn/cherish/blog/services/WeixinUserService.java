@@ -50,7 +50,7 @@ public class WeixinUserService {
         String fromUserName = msgMap.get("FromUserName");//来自发送方帐号（一个OpenID）
         String toUserName = msgMap.get("ToUserName");//发给这边的公众号
         String msgType = msgMap.get("MsgType");
-        String content = msgMap.get("Content");
+        String content = msgMap.get("Content").trim();
 
         if ("chat".equals(content.trim())) {
             //设置openid
@@ -65,16 +65,17 @@ public class WeixinUserService {
                     weixinUser.setCity(userInfo.getCity());
                     weixinUser.setHeadimgurl(userInfo.getHeadimgurl());
                     weixinUser.setNickname(userInfo.getNickname());
-                    weixinUser.setSex(userInfo.getSex().shortValue());
+                    weixinUser.setSex(userInfo.getSex());
                     weixinUser.setSubscribetime(new Date());
                 }
-                log.info("openid:" + fromUserName + "执行保存weixinUser到数据库");
+                System.out.println("openid:" + fromUserName + "执行保存weixinUser到数据库");
+                System.out.println(weixinUser);
                 weixinUserDao.save(weixinUser);
             }
             return MessageUtil.initText(toUserName, fromUserName, "进入聊天模式");
         }else if ("close".equals(content.trim())){
             request.getServletContext().removeAttribute(fromUserName);
-            return MessageUtil.initText(toUserName, fromUserName, "好的，推出聊天模式");
+            return MessageUtil.initText(toUserName, fromUserName, "好的，退出聊天模式");
         }
 
         //图灵机器人聊天喔
@@ -87,7 +88,7 @@ public class WeixinUserService {
         if(MessageUtil.MESSAGE_TEXT.equals(msgType)){//文字信息
 			/* 核心是解剖对方发过来的文字信息   作出相应的回答  */
 
-            if("1".equals(content)){
+            if("1".equals(content) || "天气查询".equals(content)){
                 message = MessageUtil.initText(toUserName, fromUserName, MessageUtil.WEATHER);
             }else if(content.startsWith("天气")){
                 String city = content.replaceAll("^天气", "").trim();
@@ -98,7 +99,7 @@ public class WeixinUserService {
                 }
             }else if("2".equals(content)){
                 message = MessageUtil.initNewsMessage(toUserName, fromUserName);
-            }else if("3".equals(content)){
+            }else if("3".equals(content) || "翻译功能".equals(content)){
                 message = MessageUtil.initText(toUserName, fromUserName, MessageUtil.TRANSLATRE);
             }else if(content.startsWith("翻译")){//^翻译 指以"翻译"开头的字符串
                 String word = content.replaceAll("^翻译", "").trim();
@@ -111,7 +112,7 @@ public class WeixinUserService {
                 message = MessageUtil.initImageMessage(toUserName, fromUserName);
             }else if("5".equals(content) || "音乐".equals(content)){
                 message = MessageUtil.initMusicMessage(toUserName, fromUserName);
-            }else if("6".equals(content)){
+            }else if("6".equals(content) || "快递查询".equals(content)){
                 message = MessageUtil.initText(toUserName, fromUserName, MessageUtil.EXPRESSAGE);
             }else if(content.startsWith("快递")){
                 String expNo = content.replaceAll("^快递", "").trim();
@@ -121,10 +122,10 @@ public class WeixinUserService {
                     message = MessageUtil.initText(toUserName, fromUserName, WeixinMsgUtil.queryShipper(expNo));
                 }
             //看我博客的朋友喔，推送链接
-            }else if("7".equals(content) || "博客".equals(content) || "文章".equals(content)){
+            }else if("7".equals(content) || "博客".equals(content) || "Cherish博客".equals(content)){
                 message = MessageUtil.initBlogMessage(toUserName, fromUserName);
             //图灵机器人回复
-            }else if("9".equals(content) || "图灵".equals(content) || "聊天".equals(content)){
+            }else if("9".equals(content) || "智能聊天模式".equals(content) || "聊天".equals(content) || "智能聊天".equals(content)){
                 message = MessageUtil.initText(toUserName, fromUserName, MessageUtil.TULING);
             }else if("help".equals(content) || "?".equals(content) || "？".equals(content)){
                 message = MessageUtil.initText(toUserName, fromUserName, MessageUtil.HELP);
