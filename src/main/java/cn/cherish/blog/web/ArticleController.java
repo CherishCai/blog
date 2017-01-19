@@ -62,7 +62,7 @@ public class ArticleController extends ABaseController{
 	@DeleteMapping("/{articleId}")
 	public Map delArticle(@PathVariable Long articleId){
 
-		articleService.removeById(articleId);
+		articleService.delete(articleId);
 		String msg = null;
 		return getReturnMap(Boolean.TRUE, msg, null);
 	}

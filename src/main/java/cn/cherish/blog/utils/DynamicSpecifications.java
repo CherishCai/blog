@@ -1,10 +1,10 @@
 package cn.cherish.blog.utils;
 
-import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class DynamicSpecifications {
 			public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
 				if (Collections3.isNotEmpty(filters)) {
 
-					List<Predicate> predicates = Lists.newArrayList();
+					List<Predicate> predicates = new ArrayList<>();
 					for (SearchFilter filter : filters) {
 						// nested path translate, 如Task的名为"user.name"的filedName, 转换为Task.user.name属性
 						String[] names = StringUtils.split(filter.fieldName, ".");

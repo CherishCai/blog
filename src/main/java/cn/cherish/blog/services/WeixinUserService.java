@@ -11,7 +11,6 @@ import cn.cherish.blog.utils.WeixinMsgUtil;
 import cn.cherish.blog.weixin4j.UserInfo;
 import cn.cherish.blog.weixin4j.WeixinUtil;
 import cn.cherish.blog.weixinjs.WeixinJs;
-import lombok.extern.slf4j.Slf4j;
 import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,11 +21,6 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
 
-/**
- * @author Cherish
- * @version Id: UserService.java, v 0.1 2016/10/30 21:40 Cherish Exp $$
- */
-@Slf4j
 @Service
 @Transactional(readOnly = true)
 public class WeixinUserService {

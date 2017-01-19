@@ -79,7 +79,7 @@ public class AutoresponseController extends ABaseController {
 
         ModelAndView modelAndView = new ModelAndView("redirect:/autoresponse");
         try {
-            autoresponseService.saveAutoresponse(autoresponse);
+            autoresponseService.save(autoresponse);
         } catch (Exception e) {
             log.error(e.getMessage());
             modelAndView.setViewName("/form/");
@@ -93,7 +93,7 @@ public class AutoresponseController extends ABaseController {
     public ModelAndView update(Autoresponse autoresponse){
         ModelAndView modelAndView = new ModelAndView("redirect:/autoresponse");
         try {
-            autoresponseService.updateAutoresponse(autoresponse);
+            autoresponseService.update(autoresponse);
         } catch (Exception e) {
             log.error(e.getMessage());
             modelAndView.setViewName("/form/"+autoresponse.getId());

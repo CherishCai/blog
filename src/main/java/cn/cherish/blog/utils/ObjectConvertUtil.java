@@ -10,7 +10,6 @@ import java.util.Map;
  * 完成Map to Object 及　Object to Map 复制
  * ObjectA to ObjectB 简单复制（不支持继承属性复制） 
  * @author yangyufa
- *
  */
 public class ObjectConvertUtil {
 	/**
@@ -20,11 +19,9 @@ public class ObjectConvertUtil {
 	 * @param map
 	 * @param cls
 	 * @return
-	 * @throws Exception
 	 */
-	public static <T> T MapToObject(Map<String, Object> map, Class<T> cls)
-			throws Exception {
-		return MapToObject(map,cls,true);
+	public static <T> T MapToObject(Map<String, Object> map, Class<T> cls) {
+		return MapToObject(map, cls, true);
 	}
 	/**
 	 *  把map 转换成对象 
@@ -33,11 +30,10 @@ public class ObjectConvertUtil {
 	 * @param cls
 	 * @param isInherit 是否赋值继承自父类的属性
 	 * @return
-	 * @throws Exception
 	 */
-	public static <T> T MapToObject(Map<String, Object> map, Class<T> cls,boolean isInherit){
-		if(map==null) return null;
-		if(map.isEmpty()) return null;
+	public static <T> T MapToObject(Map<String, Object> map, Class<T> cls, boolean isInherit) {
+		if (map == null) return null;
+		if (map.isEmpty()) return null;
 		Field[] fields = cls.getDeclaredFields();
 		T obj;
 		try {
@@ -46,15 +42,14 @@ public class ObjectConvertUtil {
 				field.setAccessible(true);
 				Class<?> clsType = field.getType();
 				String name = field.getName();
-				String strSet = "set" + name.substring(0, 1).toUpperCase()
-				+ name.substring(1, name.length());
+				String strSet = "set" + name.substring(0, 1).toUpperCase() + name.substring(1, name.length());
 				Method methodSet = cls.getDeclaredMethod(strSet, clsType);
 				if (map.containsKey(name)) {
 					methodSet.invoke(obj, map.get(name));
 				}
 			}
 			//把继承直接父类的属性也赋值
-			if(isInherit)obj = getGenericSuperclassFields(map, obj);
+			if (isInherit) obj = getGenericSuperclassFields(map, obj);
 			return obj;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -66,27 +61,26 @@ public class ObjectConvertUtil {
 	 * @param obj
 	 * @param isInherit 是否获取父类属性值
 	 * @return
-	 * @throws Exception
 	 */
-	public static Map<String, Object> objectToMap(Object obj,boolean isInherit) {
-		if(obj==null) return null;
+	public static Map<String, Object> objectToMap(Object obj, boolean isInherit) {
+		if (obj == null) return null;
 		Map<String, Object> mapValue = new HashMap<String, Object>();
 		Field[] fields = obj.getClass().getDeclaredFields();
 		for (Field field : fields) {
 			String name = field.getName();
-			String method = name.substring(0, 1).toUpperCase()+ name.substring(1, name.length());
+			String method = name.substring(0, 1).toUpperCase() + name.substring(1, name.length());
 			String strGet = "get" + method;
 			Method methodGet;
 			try {
 				methodGet = obj.getClass().getDeclaredMethod(strGet);
 				Object object = methodGet.invoke(obj);
-				mapValue.put(name,object);
+				mapValue.put(name, object);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		if(isInherit) mapValue = getGenericSuperclassFieldsToMapKeys(mapValue,obj);
-		
+		if (isInherit) mapValue = getGenericSuperclassFieldsToMapKeys(mapValue, obj);
+
 		return mapValue;
 	}
 	/**
@@ -94,7 +88,6 @@ public class ObjectConvertUtil {
 	 * (包含继承属性)
 	 * @param obj
 	 * @return
-	 * @throws Exception
 	 */
 	public static Map<String, Object> objectToMap(Object obj) {
 		return objectToMap(obj,true);
@@ -102,12 +95,10 @@ public class ObjectConvertUtil {
 
 	/**
 	 * 把源对象的值复制到目标对象中
-	 * 
 	 * @param targetObject 目标对象
 	 * @param sourceObject 临时对象
 	 * (不支持继承属性拷贝)
 	 * @return 目标对象
-	 * @throws Exception
 	 */
 	public static <T> T objectCopy(T targetObject, Object sourceObject) {
 		Class<?> cls = sourceObject.getClass();
@@ -132,7 +123,7 @@ public class ObjectConvertUtil {
 					}
 					methodSet.invoke(targetObject, object);
 				}
-			}catch (Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -140,14 +131,11 @@ public class ObjectConvertUtil {
 	}
 	/**
 	 * 为对象（obj）继承直接父类的属性赋值
-	 * @param <T>
-	 * @param data
+	 * @param <T> map
 	 * @param obj
-	 * @param methodPrefix
 	 * @return
-	 * @throws Exception
 	 */
-	private static <T> T getGenericSuperclassFields(Map<String, Object> map, T obj){
+	private static <T> T getGenericSuperclassFields(Map<String, Object> map, T obj) {
 		if (obj.getClass().getGenericSuperclass() != null) {
 			Class<?> superClass = obj.getClass().getSuperclass();// 父类
 			Field[] fields = superClass.getDeclaredFields();
@@ -175,7 +163,6 @@ public class ObjectConvertUtil {
 	 * @param mapValue
 	 * @param obj
 	 * @return
-	 * @throws Exception
 	 */
 	private static Map<String, Object> getGenericSuperclassFieldsToMapKeys(Map<String, Object> mapValue, Object obj) {
 		if (obj.getClass().getGenericSuperclass() != null) {
@@ -184,7 +171,7 @@ public class ObjectConvertUtil {
 			for (Field field : fields) {
 				String name = field.getName();
 				String strSet = "get" + name.substring(0, 1).toUpperCase()
-				+ name.substring(1, name.length());
+						+ name.substring(1, name.length());
 				Method methodSet;
 				try {
 					methodSet = superClass.getDeclaredMethod(strSet);

@@ -59,7 +59,6 @@ public abstract class ABaseService<E, PK extends Serializable> {
 
     public E findByEntityUnique(E entity) {
         return getEntityDAO().findOne(buildSpecification(entity));
-
     }
 
     public List<E> findByEntityOrder(E entity, String orderField, boolean isAsc) {
@@ -72,8 +71,7 @@ public abstract class ABaseService<E, PK extends Serializable> {
     }
 
     private Specification<E> buildSpecification(String propertyName, Object propertyValue) {
-        Specification<E> spec = DynamicSpecifications.bySearchFilter(SearchFilter.parse(buildSearchParams(propertyName, propertyValue)).values(), this.entityClass);
-        return spec;
+        return DynamicSpecifications.bySearchFilter(SearchFilter.parse(buildSearchParams(propertyName, propertyValue)).values(), this.entityClass);
     }
 
     @Transactional(readOnly = false)
@@ -81,17 +79,16 @@ public abstract class ABaseService<E, PK extends Serializable> {
         return getEntityDAO().save(entity);
     }
 
-
-    public Long getCount() {
+    public Long count() {
         return getEntityDAO().count();
     }
 
-    public Long getCount(E entity) {
+    public Long count(E entity) {
         return getEntityDAO().count(buildSpecification(entity));
     }
 
     @Transactional(readOnly = false)
-    public void removeById(PK id) {
+    public void delete(PK id) {
         getEntityDAO().delete(id);
     }
 
@@ -115,6 +112,10 @@ public abstract class ABaseService<E, PK extends Serializable> {
         Specification<E> spec = buildSpecification(searchParams);
         return this.getEntityDAO().findAll(spec, pageRequest);
     }
+
+    //****************************************
+    //*     以下是本类的私有方法，用于构建
+    //*****************************************
 
     private Specification<E> buildSpecification(E entity) {
         //Class<E> clazz = (Class<E>) entity.getClass();
@@ -143,8 +144,8 @@ public abstract class ABaseService<E, PK extends Serializable> {
                             continue;
                         }
                     }
-                    String searchParam = "EQ_" + key;
-                    searchParams.put(searchParam, value);
+                    //String searchParam = "EQ_" + key;
+                    searchParams.put("EQ_" + key, value);
                 }
             }
         }
@@ -154,20 +155,26 @@ public abstract class ABaseService<E, PK extends Serializable> {
     /**
      * 把实体对象封装成Map<String,Object>
      * 如：object对象 ==>Map｛EQ_id:1;EQ_name:admin}
+     * @param propertyName 属性名称
+     * @param propertyValue 属性值
+     * @return Map<String, Object>
      */
     private Map<String, Object> buildSearchParams(String propertyName, Object propertyValue) {
         Map<String, Object> searchParams = new HashMap<>();
-        String searchParam = "EQ_" + propertyName;
-        searchParams.put(searchParam, propertyValue);
+        //String searchParam = "EQ_" + propertyName;
+        searchParams.put("EQ_" + propertyName, propertyValue);
         return searchParams;
     }
 
     /**
      * 创建分页请求.
+     * @param pageNumber 页码
+     * @param pagzSize 每页条数
+     * @param sortType 升序或倒序
+     * @return PageRequest
      */
     private PageRequest buildPageRequest(int pageNumber, int pagzSize, String sortType) {
         Sort sort = new Sort(Direction.DESC, "id");
-        ;
         if (!StringUtils.isEmpty(sortType) && !"auto".equals(sortType)) {
             sort = new Sort(Direction.ASC, sortType.trim());
         }

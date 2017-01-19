@@ -3,19 +3,16 @@ package cn.cherish.blog.services;
 import cn.cherish.blog.entity.Article;
 import cn.cherish.blog.repository.ArticleDao;
 import cn.cherish.blog.repository.IBaseDao;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
-/**
- * Created by Cherish on 2017/1/10.
- */
-@Slf4j
 @Service
 @Transactional(readOnly = true)
+@CacheConfig(cacheNames = "articles")
 public class ArticleService extends ABaseService<Article, Long> {
 
     @Autowired

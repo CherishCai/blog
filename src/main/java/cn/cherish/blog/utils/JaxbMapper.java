@@ -22,7 +22,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class JaxbMapper {
 
-	private static ConcurrentMap<Class, JAXBContext> jaxbContexts = new ConcurrentHashMap<Class, JAXBContext>();
+	private static ConcurrentMap<Class, JAXBContext> jaxbContexts = new ConcurrentHashMap<>();
 
 	/**
 	 * Java Object->Xml without encoding.

@@ -1,8 +1,8 @@
 package cn.cherish.blog.utils;
 
-import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -26,7 +26,7 @@ public class SearchFilter {
 	 * searchParams中key的格式为OPERATOR_FIELDNAME
 	 */
 	public static Map<String, SearchFilter> parse(Map<String, Object> searchParams) {
-		Map<String, SearchFilter> filters = Maps.newHashMap();
+		Map<String, SearchFilter> filters = new HashMap<>();
 
 		for (Entry<String, Object> entry : searchParams.entrySet()) {
 			// 过滤掉空值

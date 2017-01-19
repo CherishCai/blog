@@ -157,22 +157,14 @@ public class ValidateCode {
 	/**
 	 * 已有验证码，生成验证码图片
 	 * 
-	 * @param textCode
-	 *            文本验证码
-	 * @param width
-	 *            图片宽度
-	 * @param height
-	 *            图片高度
-	 * @param interLine
-	 *            图片中干扰线的条数
-	 * @param randomLocation
-	 *            每个字符的高低位置是否随机
-	 * @param backColor
-	 *            图片颜色，若为null，则采用随机颜色
-	 * @param foreColor
-	 *            字体颜色，若为null，则采用随机颜色
-	 * @param lineColor
-	 *            干扰线颜色，若为null，则采用随机颜色
+	 * @param textCode 文本验证码
+	 * @param width 图片宽度
+	 * @param height 图片高度
+	 * @param interLine 图片中干扰线的条数
+	 * @param randomLocation 每个字符的高低位置是否随机
+	 * @param backColor 图片颜色，若为null，则采用随机颜色
+	 * @param foreColor 字体颜色，若为null，则采用随机颜色
+	 * @param lineColor 干扰线颜色，若为null，则采用随机颜色
 	 * @return 图片缓存对象
 	 */
 	public static BufferedImage generateImageCode(String textCode, int width, int height, int interLine,
@@ -227,26 +219,16 @@ public class ValidateCode {
 	/**
 	 * 生成图片验证码
 	 * 
-	 * @param type
-	 *            验证码类型，参见本类的静态属性
-	 * @param length
-	 *            验证码字符长度，大于0的整数
-	 * @param exChars
-	 *            需排除的特殊字符
-	 * @param width
-	 *            图片宽度
-	 * @param height
-	 *            图片高度
-	 * @param interLine
-	 *            图片中干扰线的条数
-	 * @param randomLocation
-	 *            每个字符的高低位置是否随机
-	 * @param backColor
-	 *            图片颜色，若为null，则采用随机颜色
-	 * @param foreColor
-	 *            字体颜色，若为null，则采用随机颜色
-	 * @param lineColor
-	 *            干扰线颜色，若为null，则采用随机颜色
+	 * @param type 验证码类型，参见本类的静态属性
+	 * @param length 验证码字符长度，大于0的整数
+	 * @param exChars 需排除的特殊字符
+	 * @param width 图片宽度
+	 * @param height 图片高度
+	 * @param interLine 图片中干扰线的条数
+	 * @param randomLocation 每个字符的高低位置是否随机
+	 * @param backColor 图片颜色，若为null，则采用随机颜色
+	 * @param foreColor 字体颜色，若为null，则采用随机颜色
+	 * @param lineColor 干扰线颜色，若为null，则采用随机颜色
 	 * @return 图片缓存对象
 	 */
 	public static BufferedImage generateImageCode(int type, int length, String exChars, int width, int height,
