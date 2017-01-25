@@ -51,7 +51,7 @@ public class WeatherUtil {
         String httpArg = "city="+city.trim();
         System.out.println("httpArg:" + httpArg);
         try {
-            String jsonResult = request(httpUrl, httpArg);
+            String jsonResult = doQuery(httpUrl, httpArg);
 
             if(jsonResult.indexOf("ok") > 0){
 
@@ -94,7 +94,7 @@ public class WeatherUtil {
      * @param httpArg  :参数
      * @return 返回结果
      */
-    public static String request(String httpUrl, String httpArg) throws IOException {
+    public static String doQuery(String httpUrl, String httpArg) throws IOException {
         BufferedReader reader = null;
         StringBuffer sbf = new StringBuffer();
         httpUrl = httpUrl + "?" + httpArg;

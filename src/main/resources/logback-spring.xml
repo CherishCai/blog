@@ -28,10 +28,10 @@
         <logger name="org.springframework.security" level="WARN"/>
 
         <appender name="dailyRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
-            <File>../logs/blog.log</File>
+            <File>./logs/blog.log</File>
             <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
                 <!-- daily rollover -->
-                <FileNamePattern>../logs/blog.%d{yyyy-MM-dd}.log</FileNamePattern>
+                <FileNamePattern>./logs/blog.%d{yyyy-MM-dd}.log</FileNamePattern>
                 <!-- keep 30 days' worth of history -->
                 <maxHistory>30</maxHistory>
             </rollingPolicy>

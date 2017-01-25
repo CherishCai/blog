@@ -20,7 +20,7 @@ public class ABaseController {
 	protected static final int NOT_LOGIN_CODE = 100;
 
 	protected Map<String, Object> getReturnMap(int code, String message, Object data) {
-		Map<String, Object> map = new HashMap<>(3);
+		Map<String, Object> map = new HashMap<>(5);
 		map.put("code", code);
 		map.put("message", message);
 		map.put("data", data);
@@ -28,7 +28,7 @@ public class ABaseController {
 	}
 	
 	protected Map<String, Object> getReturnMap(boolean success, String message, Object data) {
-		Map<String, Object> map = new HashMap<>(3);
+		Map<String, Object> map = new HashMap<>(5);
 		map.put("success", success);
 		map.put("message", message);
 		map.put("data", data);
