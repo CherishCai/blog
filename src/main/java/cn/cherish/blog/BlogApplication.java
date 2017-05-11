@@ -12,6 +12,7 @@ import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletCon
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 
 @SpringBootApplication
 @EnableCaching
@@ -27,6 +28,7 @@ public class BlogApplication extends SpringBootServletInitializer {
 	}
 
 
+	@Profile("prod")
     @Bean
     public EmbeddedServletContainerFactory servletContainer() {
 

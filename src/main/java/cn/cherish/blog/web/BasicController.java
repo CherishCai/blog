@@ -50,7 +50,7 @@ public class BasicController {
 	 */
 	@PostMapping(value = "/login")
 	public ModelAndView login(HttpServletRequest request){
-
+		log.info("【执行登陆】 ");
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("login");
 

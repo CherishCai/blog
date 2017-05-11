@@ -5,7 +5,15 @@ html, body {
 	height: 100%;
 	width: 100%;
 }
+a{
+	text-decoration: none;
+    color: rgba(255, 255, 255, 0.8);
+}
 
+a:hover {
+    text-decoration: none;
+    color: #fff;
+}
 .push50 {
 	margin-top: 50px;
 }
