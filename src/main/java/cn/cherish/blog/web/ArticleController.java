@@ -1,8 +1,8 @@
 package cn.cherish.blog.web;
 
-import cn.cherish.blog.dto.ArticleSearchDto;
-import cn.cherish.blog.entity.Article;
-import cn.cherish.blog.services.ArticleService;
+import cn.cherish.blog.web.request.ArticleSearchReq;
+import cn.cherish.blog.dal.entity.Article;
+import cn.cherish.blog.service.ArticleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -31,7 +31,7 @@ public class ArticleController extends ABaseController{
 
 	@GetMapping("/list")
 	@ResponseBody
-	public Map<String, Object> list(ArticleSearchDto articleSearchDto) {
+	public Map<String, Object> list(ArticleSearchReq articleSearchDto) {
 
 		try {
 			Map<String, Object> searchParams = new HashMap<>();

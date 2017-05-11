@@ -1,8 +1,8 @@
 package cn.cherish.blog.web;
 
-import cn.cherish.blog.entity.Article;
-import cn.cherish.blog.services.ArticleService;
-import cn.cherish.blog.utils.CheckMobile;
+import cn.cherish.blog.dal.entity.Article;
+import cn.cherish.blog.service.ArticleService;
+import cn.cherish.blog.util.CheckMobile;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

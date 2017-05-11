@@ -1,6 +1,6 @@
 package cn.cherish.blog;
 
-import cn.cherish.blog.services.AutoresponseService;
+import cn.cherish.blog.service.AutoresponseService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

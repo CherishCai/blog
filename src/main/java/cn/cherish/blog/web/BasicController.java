@@ -1,8 +1,13 @@
 package cn.cherish.blog.web;
 
-import cn.cherish.blog.utils.ValidateCode;
+import cn.cherish.blog.util.ValidateCode;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -19,12 +24,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 @Slf4j
 @Controller
@@ -94,9 +96,9 @@ public class BasicController {
 
 
 	@PostMapping("/imageUpload")
-	@ResponseBody
-	public Map<String, Object> upload(@RequestParam("editormd-image-file") MultipartFile multipartFile, HttpServletRequest request){
-        Map<String, Object> map = new HashMap<>(3);
+    @ResponseBody
+	public Map upload(@RequestParam("editormd-image-file") MultipartFile multipartFile, HttpServletRequest request){
+        Map<String, Object> map = new HashMap<>(5);
         map.put("success", 0);//0 | 1, // 0 表示上传失败，1 表示上传成功
         map.put("message", "提示的信息，上传成功或上传失败及错误信息等。");
 
@@ -110,7 +112,7 @@ public class BasicController {
             try {
                 String originalFilename = multipartFile.getOriginalFilename();
 
-                String newFIleName = UUID.randomUUID().toString()
+                String newFIleName = System.currentTimeMillis()//UUID.randomUUID().toString()
                         + originalFilename.substring(originalFilename.lastIndexOf("."));
                 multipartFile.transferTo(new File(directory, newFIleName));
 //				FileUtils.copyInputStreamToFile(multipartFile.getInputStream(),
@@ -127,30 +129,28 @@ public class BasicController {
             }
 
         } // end if
-
-        return map;
+       return map;
     }
 
     @GetMapping("/imageDownload")
-    public void downloadImage(@RequestParam("filename") String filename, HttpServletResponse response) throws IOException {
+    public ResponseEntity<byte[]> downloadImage(@RequestParam("filename") String filename, HttpServletResponse response) throws IOException {
         File file = new File("/cherish", filename);
 
-//		HttpHeaders headers = new HttpHeaders();
-//		headers.setContentDispositionFormData("attachment", filename);
-//        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-//        return new ResponseEntity<byte[]>(
-//        		FileUtils.readFileToByteArray(file),
-//                headers, HttpStatus.CREATED);
-        byte[] b = null;
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentDispositionFormData("attachment", filename);
+        headers.setContentType(MediaType.IMAGE_PNG);
+        return new ResponseEntity<byte[]>(
+        		FileUtils.readFileToByteArray(file),
+                headers, HttpStatus.OK);
+        /*byte[] b = null;
         response.setContentType("image/png");
 
         try (FileInputStream fis = new FileInputStream(file);
             OutputStream out = response.getOutputStream();){
 
-//			b = new byte[fis.available()];
             b = new byte[2048];
             int len = 0;
-            while((len = fis.read(b)) > 0){
+            while ((len = fis.read(b)) > 0){
                 out.write(b);
             }
             out.flush();
@@ -158,7 +158,7 @@ public class BasicController {
             e.printStackTrace();
         } finally {
 
-        }
+        }*/
     }
 
 

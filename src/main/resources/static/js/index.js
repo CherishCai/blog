@@ -48,8 +48,6 @@ $(document).ready(function() {
     });
     <!-- /Slideshow Background -->
 
-	<!-- Mixitup : Grid 图片网格 -->
-    $("#Grid").mixitup();
 
     <!-- Custom JavaScript for Smooth Scrolling - Put in a custom JavaScript file to clean this up -->
     $("a[href*=#]:not([href=#])").click(function() {

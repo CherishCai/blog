@@ -1,16 +1,16 @@
 package cn.cherish.blog.web;
 
-import cn.cherish.blog.entity.Contact;
-import cn.cherish.blog.entity.WeixinUser;
-import cn.cherish.blog.services.ContactService;
-import cn.cherish.blog.services.WeixinUserService;
-import cn.cherish.blog.utils.MD5Util;
-import cn.cherish.blog.utils.SessionUtil;
-import cn.cherish.blog.weixin4j.OAuthInfo;
-import cn.cherish.blog.weixin4j.UserInfo;
-import cn.cherish.blog.weixin4j.WeixinConfig;
-import cn.cherish.blog.weixin4j.WeixinUtil;
-import cn.cherish.blog.weixinjs.Sign;
+import cn.cherish.blog.dal.entity.Contact;
+import cn.cherish.blog.dal.entity.WxUser;
+import cn.cherish.blog.service.ContactService;
+import cn.cherish.blog.service.WeixinUserService;
+import cn.cherish.blog.util.MD5Util;
+import cn.cherish.blog.util.SessionUtil;
+import cn.cherish.blog.common.weixin4j.OAuthInfo;
+import cn.cherish.blog.common.weixin4j.UserInfo;
+import cn.cherish.blog.common.weixin4j.WeixinConfig;
+import cn.cherish.blog.common.weixin4j.WeixinUtil;
+import cn.cherish.blog.common.weixinjs.Sign;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.dom4j.DocumentException;
@@ -105,7 +105,7 @@ public class ApiListController extends ABaseController {
     public void authCallback(String code, HttpSession session, HttpServletResponse response) {
 
         OAuthInfo oAuthInfo = WeixinUtil.getOAuthOpenid(code);
-        WeixinUser weixinUser = null;
+        WxUser weixinUser = null;
         try {
             weixinUser = weixinUserService.findByOpenid(oAuthInfo.getOpenid());
         } catch (Exception e1) {
@@ -116,7 +116,7 @@ public class ApiListController extends ABaseController {
         try {
             if (weixinUser == null || weixinUser.getId() == null) {
                 UserInfo userInfo = WeixinUtil.getUserInfo(oAuthInfo.getOpenid(), oAuthInfo.getAccessToken());
-                weixinUser = new WeixinUser();
+                weixinUser = new WxUser();
                 weixinUser.setOpenid(oAuthInfo.getOpenid());
                 if (userInfo != null) {
                     weixinUser.setCity(userInfo.getCity());

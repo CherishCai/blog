@@ -6,7 +6,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
     <meta name="author" content="Cherish"/>
-    <link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon" />
+    <link rel="shortcut icon" th:href="@{/static/favicon.ico}" type="image/x-icon" />
 
 	<title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Cherish博客系统</title>
 
@@ -34,12 +34,12 @@
 
         <!--logo and iconic logo start-->
         <div class="logo">
-            <a th:href="@{/}"><img th:src="@{/image/logo.svg}" alt="LOGO"></a>
+            <a th:href="@{/}"><img th:src="@{/images/logo.svg}" alt="LOGO"></a>
             <label>Cherish博客系统</label>
         </div>
 
         <div class="logo-icon text-center">
-            <a th:href="@{/}"><img th:src="@{/image/logo.svg}" alt="LOGO"></a>
+            <a th:href="@{/}"><img th:src="@{/images/logo.svg}" alt="LOGO"></a>
         </div>
         <!--logo and iconic logo end-->
 
@@ -48,24 +48,18 @@
             <!-- visible to small devices only 只在小型设备手机端显示-->
             <div class="visible-xs hidden-sm hidden-md hidden-lg">
                 <div class="media logged-user">
-                    <img alt="头像" th:src="@{/image/user-avatar.png}" class="media-object">
+                    <img alt="头像" th:src="@{/images/user-avatar.png}" class="media-object">
                     <div class="media-body">
                         <h4>
                             <a href="#"><label sec:authentication="name"></label></a>
                         </h4>
                     </div>
                 </div>
-
-                <h5 class="left-nav-title">用户信息</h5>
-                <ul class="nav nav-pills nav-stacked custom-nav">
-                    <li><a th:href="@{/profile}"><i class="fa fa-user"></i> <span>个人信息</span></a></li>
-                    <li><a th:href="@{/logout}" class="logout"><i class="fa fa-sign-out"></i> <span>登出</span></a></li>
-                </ul>
             </div>
 
             <!--sidebar nav start-->
             <ul class="nav nav-pills nav-stacked custom-nav">
-                <li class="active"><a href="/admin"><i class="fa fa-home"></i> <span> 数据汇总</span></a></li>
+                <li class="active"><a th:href="@{/admin}"><i class="fa fa-home"></i> <span> 数据汇总</span></a></li>
 
                 <li class="menu-list"><a href=""><i class="fa fa-laptop"></i>
                     <span> 文章管理</span></a>
@@ -122,7 +116,7 @@
 
                     <li><a href="#" class="btn btn-default dropdown-toggle"
                            data-toggle="dropdown"> <img
-                            th:src="@{/image/user-avatar.png}" alt="" /> <label sec:authentication="name"></label> <span class="caret"></span>
+                            th:src="@{/images/user-avatar.png}" alt="" /> <label sec:authentication="name"></label> <span class="caret"></span>
                     </a>
                         <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
                             <li><a th:href="@{/profile}"><i class="fa fa-user"></i> 个人信息</a></li>

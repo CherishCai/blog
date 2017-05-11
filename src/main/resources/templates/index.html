@@ -14,14 +14,14 @@
 
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
 	<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-	<link th:href="@{/css/index.css}" href="../static/css/index.css" rel="stylesheet"/>
+	<link href="/css/index.css" rel="stylesheet"/>
 </head>
 <body>
 
 	<!-- Header Area -->
 	<div id="top" class="header">
 		<div class="vert-text">
-			<img class="img-circle" id="logo" alt="Company Logo" src="../static/image/logo.jpg" />
+			<img class="img-circle" id="logo" alt="Company Logo" src="../static/images/logo.jpg" />
 			<h2>
 				<em>Cherish Cai</em>
 			</h2>
@@ -53,7 +53,7 @@
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a href="#top"><img class="img-circle img-little" id="myself" alt="head portrait" src="../static/image/myself.jpg" /></a>
+					<a href="#top"><img class="img-circle img-little" id="myself" alt="head portrait" src="../static/images/myself.jpg" /></a>
 					<a href="#top" class="navbar-brand">&nbsp;&nbsp;Cherish</a>
 				</div>
 				<div class="collapse navbar-collapse" id="mobilemenu">
@@ -63,7 +63,7 @@
 						<li><a href="#about"><i class="service-icon fa fa-info"></i>&nbsp;About</a></li>
 						<li><a href="#cooltimer"><i class="service-icon fa fa-spinner"></i>&nbsp;Timer</a></li>
 						<li><a href="#services"><i class="service-icon fa fa-heart"></i>&nbsp;Blog</a></li>
-						<li><a href="#portfolio"><i class="service-icon fa fa-camera"></i>&nbsp;Portfolio</a></li>
+						<li><a href="#focusMe"><i class="service-icon fa fa-qrcode"></i>&nbsp;focusMe</a></li>
 						<li><a href="#contact"><i class="service-icon fa fa-envelope"></i>&nbsp;Contact</a></li>
 					</ul>
 				</div>
@@ -141,7 +141,7 @@
 	<!-- /Services -->
 
 	<!-- Portfolio -->
-	<div id="portfolio" class="portfolio">
+	<div id="focusMe" class="focusMe">
 		<div class="container">
 			<div class="row push50">
 				<div class="col-md-4 col-md-offset-4 text-center">
@@ -158,250 +158,6 @@
 
 			<div class="row">
 
-				<div class="gallery">
-
-					<ul id="Grid" class="gcontainer">
-						<li class="col-md-4 col-sm-4 col-xs-12 mix bw portraits"
-							data-cat="graphics"><a data-toggle="modal"
-							data-target="#portrait1" class="mix-cover"> <img
-								class="horizontal" src="../static/image/portrait1-sm.jpg" alt="placeholder">
-								<span class="overlay"><span class="valign"></span><span
-									class="title">Portrait 1</span></span>
-						</a></li>
-						<li class="col-md-4 col-sm-4 col-xs-12 mix portraits"
-							data-cat="graphics"><a data-toggle="modal"
-							data-target="#portrait2" class="mix-cover"> <img
-								class="horizontal" src="../static/image/portrait2.jpg" alt="placeholder">
-								<span class="overlay"><span class="valign"></span><span
-									class="title">Portrait 2</span></span>
-						</a></li>
-						<li class="col-md-4 col-sm-4 col-xs-12 mix nature"
-							data-cat="nature"><a data-toggle="modal"
-							data-target="#nature1" class="mix-cover"> <img
-								class="horizontal" src="../static/image/nature1.jpg" alt="placeholder">
-								<span class="overlay"><span class="valign"></span><span
-									class="title">Nature 1</span></span>
-						</a></li>
-						<li class="col-md-4 col-sm-4 col-xs-12 mix portraits"
-							data-cat="portraits"><a data-toggle="modal"
-							data-target="#portrait3" class="mix-cover"> <img
-								class="horizontal" src="../static/image/portrait3.jpg" alt="placeholder">
-								<span class="overlay"><span class="valign"></span><span
-									class="title">Portrait 3</span></span>
-						</a></li>
-						<li class="col-md-4 col-sm-4 col-xs-12 mix portraits"
-							data-cat="portraits"><a data-toggle="modal"
-							data-target="#portrait5" class="mix-cover"> <img
-								class="horizontal" src="../static/image/portrait5.jpg" alt="placeholder">
-								<span class="overlay"><span class="valign"></span><span
-									class="title">Portrait 5</span></span>
-						</a></li>
-						<li class="col-md-4 col-sm-4 col-xs-12 mix nature"
-							data-cat="nature"><a data-toggle="modal"
-							data-target="#nature" class="mix-cover"> <img
-								class="horizontal" src="../static/image/nature.jpg" alt="placeholder">
-								<span class="overlay"><span class="valign"></span><span
-									class="title">Nature</span></span>
-						</a></li>
-						<li class="col-md-4 col-sm-4 col-xs-12 mix portraits"
-							data-cat="portrait"><a data-toggle="modal"
-							data-target="#portrait4" class="mix-cover green"> <img
-								class="vertical" src="../static/image/portrait4.jpg" alt="portrait 4">
-								<span class="overlay"><span class="valign"></span><span
-									class="title">Portrait 4</span></span>
-						</a></li>
-						<li class="col-md-4 col-sm-4 col-xs-12 mix bw nature all"
-							data-cat="portrait"><a data-toggle="modal"
-							data-target="#forest" class="mix-cover green"> <img
-								class="vertical" src="../static/image/forest.jpg" alt="Forest"> <span
-								class="overlay"><span class="valign"></span><span
-									class="title">Forest</span></span>
-						</a></li>
-						<li class="col-md-4 col-sm-4 col-xs-12 mix bw nature all"
-							data-cat="bw"><a data-toggle="modal" data-target="#bw1"
-							class="mix-cover green"> <img class="vertical"
-														  src="../static/image/bw1.jpg" alt="Black and White"> <span
-								class="overlay"><span class="valign"></span><span
-									class="title">Black &amp; White</span></span>
-						</a></li>
-					</ul>
-
-					<!-- Load Photo in Modal -->
-					<div class="modal fade" id="portrait1" tabindex="-1" role="dialog"
-						aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal"
-										aria-hidden="true">&times;</button>
-									<h4 class="modal-title text-center">Portrait 1</h4>
-								</div>
-								<div class="modal-body">
-									<img class="thumbnail" alt="Portrait1" src="../static/image/portrait1.jpg" />
-								</div>
-							</div>
-							<!-- /.modal-content -->
-						</div>
-						<!-- /.modal-dialog -->
-					</div>
-					<!-- /.modal -->
-
-					<div class="modal fade" id="portrait2" tabindex="-1" role="dialog"
-						aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal"
-										aria-hidden="true">&times;</button>
-									<h4 class="modal-title text-center">Portrait 2</h4>
-								</div>
-								<div class="modal-body">
-									<img class="thumbnail" alt="Portrait1" src="../static/image/portrait2.jpg" />
-								</div>
-							</div>
-							<!-- /.modal-content -->
-						</div>
-						<!-- /.modal-dialog -->
-					</div>
-					<!-- /.modal -->
-
-					<div class="modal fade" id="portrait3" tabindex="-1" role="dialog"
-						aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal"
-										aria-hidden="true">&times;</button>
-									<h4 class="modal-title text-center">Portrait 3</h4>
-								</div>
-								<div class="modal-body">
-									<img class="thumbnail" alt="Portrait1" src="../static/image/portrait3.jpg" />
-								</div>
-							</div>
-							<!-- /.modal-content -->
-						</div>
-						<!-- /.modal-dialog -->
-					</div>
-					<!-- /.modal -->
-
-					<div class="modal fade" id="portrait4" tabindex="-1" role="dialog"
-						aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal"
-										aria-hidden="true">&times;</button>
-									<h4 class="modal-title text-center">Portrait 4</h4>
-								</div>
-								<div class="modal-body">
-									<img class="thumbnail" alt="Portrait1" src="../static/image/portrait4.jpg" />
-								</div>
-							</div>
-							<!-- /.modal-content -->
-						</div>
-						<!-- /.modal-dialog -->
-					</div>
-					<!-- /.modal -->
-
-					<div class="modal fade" id="portrait5" tabindex="-1" role="dialog"
-						aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal"
-										aria-hidden="true">&times;</button>
-									<h4 class="modal-title text-center">Portrait 5</h4>
-								</div>
-								<div class="modal-body">
-									<img class="thumbnail" alt="Portrait1" src="../static/image/portrait5.jpg" />
-								</div>
-							</div>
-							<!-- /.modal-content -->
-						</div>
-						<!-- /.modal-dialog -->
-					</div>
-					<!-- /.modal -->
-
-					<div class="modal fade" id="nature" tabindex="-1" role="dialog"
-						aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal"
-										aria-hidden="true">&times;</button>
-									<h4 class="modal-title text-center">Nature</h4>
-								</div>
-								<div class="modal-body">
-									<img class="thumbnail" alt="nature" src="../static/image/nature.jpg" />
-								</div>
-							</div>
-							<!-- /.modal-content -->
-						</div>
-						<!-- /.modal-dialog -->
-					</div>
-					<!-- /.modal -->
-
-					<div class="modal fade" id="nature1" tabindex="-1" role="dialog"
-						aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal"
-										aria-hidden="true">&times;</button>
-									<h4 class="modal-title text-center">Nature 1</h4>
-								</div>
-								<div class="modal-body">
-									<img class="thumbnail" alt="nature" src="../static/image/nature1.jpg" />
-								</div>
-							</div>
-							<!-- /.modal-content -->
-						</div>
-						<!-- /.modal-dialog -->
-					</div>
-					<!-- /.modal -->
-
-
-					<div class="modal fade" id="forest" tabindex="-1" role="dialog"
-						aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal"
-										aria-hidden="true">&times;</button>
-									<h4 class="modal-title text-center">Forest</h4>
-								</div>
-								<div class="modal-body">
-									<img class="thumbnail" alt="forest" src="../static/image/forest.jpg" />
-								</div>
-							</div>
-							<!-- /.modal-content -->
-						</div>
-						<!-- /.modal-dialog -->
-					</div>
-					<!-- /.modal -->
-
-					<div class="modal fade" id="bw1" tabindex="-1" role="dialog"
-						aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal"
-										aria-hidden="true">&times;</button>
-									<h4 class="modal-title text-center">Black and White</h4>
-								</div>
-								<div class="modal-body">
-									<img class="thumbnail" alt="forest" src="../static/image/bw1.jpg" />
-								</div>
-							</div>
-							<!-- /.modal-content -->
-						</div>
-						<!-- /.modal-dialog -->
-					</div>
-					<!-- /.modal -->
-
-
-					<!-- /Load Photo in Modal -->
-				</div>
 			</div>
 		</div>
 	</div>
@@ -476,11 +232,10 @@
 	<!--  js  -->
     <script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="../static/js/jquery-scrolltofixed-min.js" type="text/javascript"></script>
-	<script src="../static/js/jquery.vegas.js" type="text/javascript"></script>
-	<script src="../static/js/jquery.mixitup.min.js" type="text/javascript"></script>
+	<script src="/js/jquery-scrolltofixed-min.js" type="text/javascript"></script>
+	<script src="/js/jquery.vegas.js" type="text/javascript"></script>
     <script src="https://cdn.bootcss.com/jquery-validate/1.16.0/jquery.validate.min.js"></script>
-	<script src="../static/js/index.js" type="text/javascript"></script>
+	<script src="/js/index.js" type="text/javascript"></script>
 
 	<!-- 它过于慢，留作最后加载 -->
 	<link rel="stylesheet" type="text/css"

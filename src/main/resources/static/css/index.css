@@ -18,7 +18,7 @@ html, body {
 	border-radius: 10px;
 	background: #000;
 	background: rgba(0, 0, 0, 0.7);
-	background: url(../image/loading.gif) no-repeat center center;
+	background: url(../images/loading.gif) no-repeat center center;
 	/* Loading Gif by http://preloaders.net/ */
 	height: 32px;
 	left: 20px;
@@ -29,7 +29,7 @@ html, body {
 }
 
 .vegas-overlay {
-	background: transparent url(../image/overlay.png);
+	background: transparent url(../images/overlay.png);
 	opacity: 0.5;
 	z-index: -1;
 }
@@ -248,7 +248,7 @@ html, body {
 label.valid {
 	width: 24px;
 	height: 24px;
-	background: url(../image/valid.png) center center no-repeat;
+	background: url(../images/valid.png) center center no-repeat;
 	display: inline-block;
 	text-indent: -9999px;
 }
@@ -260,76 +260,8 @@ label.error {
 	margin-top: 2px;
 }
 
-.portfolio {
+.focusMe {
 	background: #f1f1f1;
-}
-/* gallery */
-.gallery {
-	overflow: hidden;
-}
-
-.gallery:after {
-	content: "";
-	display: inline-block;
-	width: 100%;
-}
-
-.gallery .mix {
-	color: #FFFFFF;
-	display: none;
-	font-size: 30px;
-	margin: 0 0 30px;
-	opacity: 0;
-	overflow: hidden;
-	text-align: center;
-	vertical-align: top;
-}
-
-.gallery .mix.full {
-	height: auto;
-}
-
-.gallery a.mix-cover img {
-	width: 100%;
-}
-
-.gallery a.mix-cover, .gallery span.cover {
-	background-color: #FFFFFF;
-	border-radius: 4px 4px 0 0;
-	display: block;
-	overflow: hidden;
-}
-
-.gallery.portfolio a.mix-cover, .gallery.portfolio a.mix-cover .overlay
-	{
-	border-radius: 4px;
-}
-
-.gallery .mix a img, .gallery .mix a span.overlay {
-	border-radius: 4px 4px 0 0;
-	box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.1);
-}
-
-.gallery a.mix-cover {
-	position: relative;
-	transition: top 0.5s ease 0s;
-}
-
-.gallery span.cover {
-	background-color: #F4D432;
-	position: absolute;
-	top: -100%;
-}
-
-.gallery span.cover span {
-	color: #FFFFFF;
-	height: 50px;
-	left: 0;
-	line-height: 50px;
-	margin-top: -25px;
-	position: absolute;
-	right: 0;
-	top: 50%;
 }
 
 img.placeholder {

@@ -1,8 +1,8 @@
 package cn.cherish.blog.web;
 
-import cn.cherish.blog.dto.BasicSearchDto;
-import cn.cherish.blog.entity.Autoresponse;
-import cn.cherish.blog.services.AutoresponseService;
+import cn.cherish.blog.web.request.BasicSearchReq;
+import cn.cherish.blog.dal.entity.Autoresponse;
+import cn.cherish.blog.service.AutoresponseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -32,7 +32,7 @@ public class AutoresponseController extends ABaseController {
 
     @GetMapping("/list")
     @ResponseBody
-    public Map<String, Object> list(BasicSearchDto basicSearchDto) {
+    public Map<String, Object> list(BasicSearchReq basicSearchDto) {
 
         try {
             Map<String, Object> searchParams = new HashMap<>();
