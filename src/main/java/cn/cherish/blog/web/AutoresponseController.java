@@ -6,6 +6,7 @@ import cn.cherish.blog.service.AutoresponseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -36,9 +37,11 @@ public class AutoresponseController extends ABaseController {
 
         try {
             Map<String, Object> searchParams = new HashMap<>();
-            Page<Autoresponse> autoresponses = autoresponseService.searchAllByPageSort(
+            Page<Autoresponse> autoresponses = autoresponseService.findAllAndSort(
                     //Map<String, Object> searchParams, int pageNumber, int pageSize, String sortType
-                    searchParams,basicSearchDto.getPageNumber(),basicSearchDto.getPageSize(),basicSearchDto.getOrderColumn());
+                    searchParams, basicSearchDto.getPageNumber(), basicSearchDto.getPageSize(), basicSearchDto.getOrderColumn(),
+                    Sort.Direction.DESC);
+
             return getReturnMap(Boolean.TRUE,basicSearchDto.getDraw(),autoresponses);
         }catch (Exception e){
             log.error(e.getMessage());

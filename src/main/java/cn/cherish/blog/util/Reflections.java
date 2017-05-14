@@ -9,16 +9,13 @@ import java.lang.reflect.*;
 
 /**
  * 反射工具类.
- * 
  * 提供调用getter/setter方法, 访问私有变量, 调用私有方法, 获取泛型类型Class, 被AOP过的真实类等工具函数.
- * 
  * @author bill.ye
  */
 public class Reflections {
+
 	private static final String SETTER_PREFIX = "set";
-
 	private static final String GETTER_PREFIX = "get";
-
 	private static final String CGLIB_CLASS_SEPARATOR = "$$";
 
 	private static Logger logger = LoggerFactory.getLogger(Reflections.class);
@@ -208,8 +205,8 @@ public class Reflections {
 	 * @param clazz The class to introspect
 	 * @return the first generic declaration, or Object.class if cannot be determined
 	 */
-	public static <T> Class<T> getClassGenricType(final Class clazz) {
-		return getClassGenricType(clazz, 0);
+	public static <T> Class<T> getClassGenericType(final Class clazz) {
+		return getClassGenericType(clazz, 0);
 	}
 
 	/**
@@ -222,7 +219,7 @@ public class Reflections {
 	 * @param index the Index of the generic ddeclaration,start from 0.
 	 * @return the index generic declaration, or Object.class if cannot be determined
 	 */
-	public static Class getClassGenricType(final Class clazz, final int index) {
+	public static Class getClassGenericType(final Class clazz, final int index) {
 
 		Type genType = clazz.getGenericSuperclass();
 

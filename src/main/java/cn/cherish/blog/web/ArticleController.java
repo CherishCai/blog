@@ -6,6 +6,7 @@ import cn.cherish.blog.service.ArticleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -37,9 +38,12 @@ public class ArticleController extends ABaseController{
 			Map<String, Object> searchParams = new HashMap<>();
             searchParams.put("LIKE_title", articleSearchDto.getTitle());
             //searchParams.put("EQ_categoryId", articleSearchDto.getCategoryId());
-            Page<Article> articles = articleService.searchAllByPageSort(
+            Page<Article> articles = articleService.findAllAndSort(
 					//Map<String, Object> searchParams, int pageNumber, int pageSize, String sortType
-					searchParams,articleSearchDto.getPageNumber(),articleSearchDto.getPageSize(),articleSearchDto.getOrderColumn());
+					searchParams,articleSearchDto.getPageNumber(),articleSearchDto.getPageSize(),articleSearchDto.getOrderColumn(),
+					Sort.Direction.DESC);
+			String orderDir = articleSearchDto.getOrderDir();
+
 			return getReturnMap(Boolean.TRUE,articleSearchDto.getDraw(),articles);
 		}catch (Exception e){
 			log.error(e.getMessage());

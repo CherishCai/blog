@@ -41,9 +41,9 @@ public class BlogController extends ABaseController{
 			Map<String, Object> searchParams = new HashMap<>();
             //searchParams.put("LIKE_title", title);
             //searchParams.put("EQ_categoryId", articleSearchDto.getCategoryId());
-            Page<Article> articles = articleService.searchAllByPageSort(
+			Page<Article> articles = articleService.findAllAndSort(
 					//Map<String, Object> searchParams, int pageNumber, int pageSize, String sortType
-					searchParams,startIndex/pageSize+1 , pageSize, null);
+					searchParams, startIndex / pageSize + 1, pageSize, null, null);
 			modelAndView.addObject("articles",articles.getContent());
 		}catch (Exception e){
 			log.error(e.getMessage());

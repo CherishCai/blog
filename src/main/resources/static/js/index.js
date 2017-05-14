@@ -11,8 +11,8 @@ $(document).ready(function() {
 	
 	//随机logo与头像
 	var timemillis = Date.now();
-	var logo = new Image();logo.src = "/image/logo.jpg";
-	var myself = new Image();myself.src = "/image/myself.jpg";
+	var logo = new Image();logo.src = "/images/logo.jpg";
+	var myself = new Image();myself.src = "/images/myself.jpg";
 	//logo显示多一点，myself少一点
 	if(timemillis % 3 == 0){
 		$("#logo").attr("src",myself.src);
@@ -26,25 +26,25 @@ $(document).ready(function() {
     $.vegas("slideshow", {
         delay : 5000,
         backgrounds : [ {
-				src : "/image/love.svg",
+				src : "/images/love.svg",
 				fade : 2000
 			},{
-				src : "/image/cover1.jpg",
+				src : "/images/cover1.jpg",
 				fade : 2000
 			}, {
-				src : "/image/cover2.jpg",
+				src : "/images/cover2.jpg",
 				fade : 2000
 			}, {
-				src : "/image/cover3.jpg",
+				src : "/images/cover3.jpg",
 				fade : 2000
 			}, {
-				src : "/image/cover4.gif",
+				src : "/images/cover4.gif",
 				fade : 2000
 			}
 
         ]
     })("overlay", {
-        src : "/image/overlay.png"
+        src : "/images/overlay.png"
     });
     <!-- /Slideshow Background -->
 

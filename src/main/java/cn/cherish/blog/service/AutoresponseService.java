@@ -38,14 +38,14 @@ public class AutoresponseService extends  ABaseService<Autoresponse, Long>{
 
     @Transactional
     @CacheEvict(key = "#p0.getKeyword()")
-	public void update(Autoresponse newResponse) {
+	public Autoresponse update(Autoresponse newResponse) {
         Autoresponse old = autoresponseDao.findOne(newResponse.getId());
 
         old.setKeyword(newResponse.getKeyword());
         old.setMessage(newResponse.getMessage());
         old.setMsgType(newResponse.getMsgType());
 
-        autoresponseDao.save(old);
+        return autoresponseDao.save(old);
 	}
 
 

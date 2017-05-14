@@ -9,7 +9,7 @@
  // ----------------------------------------------------------------------------
 
 (function($) {
-    var $background = $("<image />").addClass("vegas-background"), $overlay = $("<div />").addClass("vegas-overlay"), $loading = $("<div />").addClass("vegas-loading"), $current = $(), paused = null, backgrounds = [], step = 0, delay = 5e3, walk = function() {}, timer, methods = {
+    var $background = $("<img />").addClass("vegas-background"), $overlay = $("<div />").addClass("vegas-overlay"), $loading = $("<div />").addClass("vegas-loading"), $current = $(), paused = null, backgrounds = [], step = 0, delay = 5e3, walk = function() {}, timer, methods = {
         init: function(settings) {
             var options = {
                 src: getBackground(),
