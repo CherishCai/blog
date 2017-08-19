@@ -1,17 +1,16 @@
 package cn.cherish.blog.web;
 
-import cn.cherish.blog.dal.entity.Contact;
-import cn.cherish.blog.dal.entity.WxUser;
-import cn.cherish.blog.service.ContactService;
-import cn.cherish.blog.service.WeixinUserService;
-import cn.cherish.blog.util.MD5Util;
-import cn.cherish.blog.util.SessionUtil;
 import cn.cherish.blog.common.weixin4j.OAuthInfo;
 import cn.cherish.blog.common.weixin4j.UserInfo;
 import cn.cherish.blog.common.weixin4j.WeixinConfig;
 import cn.cherish.blog.common.weixin4j.WeixinUtil;
 import cn.cherish.blog.common.weixinjs.Sign;
-import lombok.extern.slf4j.Slf4j;
+import cn.cherish.blog.dal.entity.Contact;
+import cn.cherish.blog.dal.entity.WxUser;
+import cn.cherish.blog.service.ContactService;
+import cn.cherish.blog.service.WxUserService;
+import cn.cherish.blog.util.MD5Util;
+import cn.cherish.blog.util.SessionUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,16 +28,19 @@ import java.io.PrintWriter;
 import java.util.Date;
 import java.util.Map;
 
-@Slf4j
 @Controller
 @RequestMapping(value = "/api")
 public class ApiListController extends ABaseController {
 
-    @Autowired
-    private WeixinUserService weixinUserService;
+    private final WxUserService wxUserService;
+
+    private final ContactService contactService;
 
     @Autowired
-    private ContactService contactService;
+    public ApiListController(ContactService contactService, WxUserService wxUserService) {
+        this.contactService = contactService;
+        this.wxUserService = wxUserService;
+    }
 
     /**
      * 检测token，链接上微信公众号
@@ -73,7 +75,7 @@ public class ApiListController extends ABaseController {
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
 
-        String message = weixinUserService.autoResponse(request);
+        String message = wxUserService.autoResponse(request);
 
         log.debug(message);
 
@@ -107,7 +109,7 @@ public class ApiListController extends ABaseController {
         OAuthInfo oAuthInfo = WeixinUtil.getOAuthOpenid(code);
         WxUser weixinUser = null;
         try {
-            weixinUser = weixinUserService.findByOpenid(oAuthInfo.getOpenid());
+            weixinUser = wxUserService.findByOpenid(oAuthInfo.getOpenid());
         } catch (Exception e1) {
             log.debug("openid:" + oAuthInfo.getOpenid() + "第一次登陆本系统weixinUser为空，数据库没有对应的数据");
             e1.printStackTrace();
@@ -126,7 +128,7 @@ public class ApiListController extends ABaseController {
                     weixinUser.setSubscribetime(new Date());
                 }
                 log.debug("openid:" + oAuthInfo.getOpenid() + "执行保存weixinUser到数据库");
-                weixinUserService.insert(weixinUser);
+                wxUserService.insert(weixinUser);
             }
             SessionUtil.addWeixinUser(session, weixinUser);
 

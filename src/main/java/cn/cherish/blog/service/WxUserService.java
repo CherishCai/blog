@@ -23,18 +23,22 @@ import java.util.Map;
 
 @Service
 @Transactional(readOnly = true)
-public class WeixinUserService {
+public class WxUserService {
+
+    private final WxUserDAO wxUserDAO;
 
     @Autowired
-    private WxUserDAO weixinUserDao;
+    public WxUserService(WxUserDAO wxUserDAO) {
+        this.wxUserDAO = wxUserDAO;
+    }
 
     @Transactional
-    public void insert(WxUser weixinUser) {
-        weixinUserDao.save(weixinUser);
+    public void insert(WxUser wxUser) {
+        wxUserDAO.save(wxUser);
     }
 
     public WxUser findByOpenid(String openid) {
-        return openid == null ? null : weixinUserDao.findByOpenid(openid);
+        return openid == null ? null : wxUserDAO.findByOpenid(openid);
     }
 
     @Transactional
@@ -50,7 +54,7 @@ public class WeixinUserService {
             //设置openid
             request.getServletContext().setAttribute(fromUserName,"1");
             //数据库保存想和我聊天的人
-            WxUser weixinUser = weixinUserDao.findByOpenid(fromUserName);
+            WxUser weixinUser = wxUserDAO.findByOpenid(fromUserName);
             if (weixinUser == null || weixinUser.getId() == null) {
                 UserInfo userInfo = WeixinUtil.getUserInfo(fromUserName, WeixinJs.getAccess_token(request.getServletContext()));
                 weixinUser = new WxUser();
@@ -63,7 +67,7 @@ public class WeixinUserService {
                     weixinUser.setSubscribetime(new Date());
                 }
                 System.out.println("openid:" + fromUserName + "执行保存weixinUser到数据库");
-                weixinUserDao.save(weixinUser);
+                wxUserDAO.save(weixinUser);
             }
             return MessageUtil.initText(toUserName, fromUserName, "进入聊天模式");
         }else if ("close".equalsIgnoreCase(content.trim())){

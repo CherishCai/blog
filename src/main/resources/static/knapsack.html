@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <meta name="author" content="Cherish"/>
+	<title>贪心算法解背包问题</title>
+    <script>
+        if(top.location!=self.location)top.location=self.location;
+    </script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container" style="margin-top: 50px;">
+    <div class="row">
+        <div class="col-md-8">
+            <section class="panel">
+                <div class="panel-body">
+                    <h2>贪心算法解 0-1背包问题</h2>
+                    <ol class="bg-info text-muted">
+                        <li>给出求解算法</li>
+                        <li>实现所给算法</li>
+                        <li>
+                            以图形化界面显输入背包容量，物品数量，通过物品数量显示输入各物品的重量与价值；最后运行算法显示0-1背包问题结果
+                        </li>
+                        <li>给出所列算法的时间复杂度分析。</li>
+                    </ol>
+                </div>
+            </section>
+        </div>
+
+        <div class="col-md-4">
+            <section class="panel">
+                <div class="panel-body text-center">
+                    <img src="https://www.caihongwen.cn/images/myself.jpg" class="img-circle"/>
+                    <p class="bg-primary ">
+                        <strong>蔡鸿文，学号：3114008098</strong><br>
+                        <em>信息与计算科学1班</em>
+                    </p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">数据填写域</h3>
+                </div>
+                <div class="panel-body">
+                    <form id="data_form" class="form form-horizontal" action="#">
+
+                        <div class="form-group">
+                            <label for="capacity" class="control-label col-md-4">总容量：</label>
+                            <div class="col-md-6">
+                                <input type="number" id="capacity" name="capacity" class="form-control"
+                                       placeholder="本次所求解的背包总容量"  min="0" autofocus required/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-4">物品1：</label>
+                            <div class="col-md-6">
+                                <input type="number" class="w form-control"
+                                       placeholder="重量" min="0" required/>
+                            </div>
+                            <label class="control-label col-md-4"></label>
+                            <div class="col-md-6">
+                                <input type="number" class="v form-control"
+                                       placeholder="价值" min="0" required/>
+                            </div>
+                        </div>
+
+                    </form>
+
+                    <button id="add" class="btn btn-info" type="button">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        添加物品
+                    </button>
+                    <p></p>
+                    <button id="calculate" class="btn btn-primary btn-lg btn-block" type="button">提交</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">结果显示域</h3>
+                </div>
+                <div class="panel-body">
+                    <table id="show_table" class="table table-bordered table-hover text-center">
+                        <tr><td>被选择的总价值</td><td id="selected_value">0</td></tr>
+                        <tr><td>被选择的总重量</td><td id="selected_weight">0</td></tr>
+                        <tr class="bg-info"><td colspan="2">被选择的物品</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    
+    // 贪心背包
+    function knapsackGreedy(c, wv){
+        var n = wv.length;
+        // 选择排序 v/w 从大到小
+        var v_w_max;
+        var v_w_tmp;
+        var index;
+        for (var i = 0; i < n; i++) {
+            v_w_max = wv[i][1] /  wv[i][0];
+            index = i;
+            for (var j = i + 1; j < n; j++) {
+                v_w_tmp = wv[j][1] / wv[j][0];
+                if (v_w_tmp > v_w_max) {
+                    index = j;
+                }
+            }
+
+            // 交换重量
+            v_w_tmp = wv[i][0];
+            wv[i][0] = wv[index][0];
+            wv[index][0] = v_w_tmp;
+            // 交换价值
+            v_w_tmp = wv[i][1];
+            wv[i][1] = wv[index][1];
+            wv[index][1] = v_w_tmp;
+        }
+        for (var i = 0; i < n; i++) {
+            console.log(wv[i][0] + " : " + wv[i][1]);
+        }
+
+        // 进行贪心选择
+        var count = 0;// 装载个数
+        var wv_selected = new Array();
+        for (var i = 0; i < n; i++) {
+            if ((c - wv[i][0]) < 0) {
+                continue;
+            }
+            c -= wv[i][0];
+            wv_selected[count] = new Array(3);
+
+            wv_selected[count][0] = wv[i][0];
+            wv_selected[count][1] = wv[i][1];
+            wv_selected[count][2] = i;
+            ++count;
+            if (0 == c) break;
+        }
+
+        $("#show_table tr:eq(2)").nextAll().remove();
+        // 使用count 计算总价值，当前重量，被选择的物品
+        var sumV = 0;
+        var sumW = 0;
+        for (var i = 0; i < count; i++) {
+            sumW += wv_selected[i][0];
+            sumV += wv_selected[i][1];
+
+            var text = '物品' + (wv_selected[i][2] + 1) + '  重量：'+ wv_selected[i][0] + ' 价值：' + wv_selected[i][1];
+            var tr = '<tr><td colspan="2">'+ text +'</td></tr>';
+            $("#show_table").append(tr);
+        }
+
+        $("#selected_value").text(sumV);
+        $("#selected_weight").text(sumW);
+
+    }
+
+    var num = 1;
+    $(function () {
+        // 添加新物品
+        $("#add").click(function () {
+            var html = ''+
+                '<div class="form-group">'+
+                    '<label class="control-label col-md-4">物品'+ (++num) +'：</label>'+
+                    '<div class="col-md-6">'+
+                        '<input type="number" class="w form-control" placeholder="重量" min="0" required/>'+
+                    '</div>'+
+                    '<label class="control-label col-md-4"></label>'+
+                    '<div class="col-md-6">'+
+                        '<input type="number" class="v form-control" placeholder="价值" min="0" required/>'+
+                    '</div>'+
+                '</div>';
+            $("#data_form").append(html);
+        });
+
+        // 计算
+        $("#calculate").click(function () {
+            // 获取数据并验证
+            var capacity = $("#capacity").val();
+            if (capacity == null || capacity == "") {
+                alert("请填写总容量");
+                return;
+            }
+            capacity = parseFloat(capacity);
+            var wvArr = new Array();// 先声明一维
+            var idx = 0;
+            $(".w").each(function(){
+                var wi = $(this).val();
+                if (wi == null || wi == "") {
+                    alert("请完整填写数据");
+                    return;
+                }
+                wvArr[idx] = new Array(2);
+                wvArr[idx++][0] = parseFloat(wi);
+            });
+            idx = 0;
+            $(".v").each(function(){
+                var vi = $(this).val();
+                if (vi == null || vi == "") {
+                    alert("请完整填写数据");
+                    return;
+                }
+                wvArr[idx++][1] = parseFloat(vi);
+            });
+            // 执行
+            knapsackGreedy(capacity, wvArr);
+        });
+
+        // 回车键事件
+        $("body").keypress(function(e) {
+            if(e.keyCode == 13) {
+                $("#calculate").click();
+            }
+            return;
+        });
+
+    });
+
+</script>
+
+</body>
+</html>

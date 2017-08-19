@@ -1,4 +1,4 @@
-package cn.cherish.blog.web.request;
+package cn.cherish.blog.web.req;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

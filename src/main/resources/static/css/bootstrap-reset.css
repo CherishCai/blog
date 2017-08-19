@@ -150,7 +150,7 @@
 /*form elements*/
 
 .form-group label {
-    font-weight: normal;
+    /*font-weight: normal;*/
 }
 
 .form-control {

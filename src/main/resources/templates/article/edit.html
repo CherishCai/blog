@@ -4,19 +4,19 @@
 	layout:decorate="layout">
 <head>
     <meta charset="utf-8"/>
-	<title>新增文章</title>
+	<title>更改文章</title>
 </head>
 <body>
 	<div layout:fragment="content" class="container">
 
         <!-- page heading start-->
         <div class="page-heading">
-            <h3>新增文章</h3>
+            <h3>更改文章</h3>
             <ul class="breadcrumb">
                 <li>
                     <a href="/article/list">文章管理</a>
                 </li>
-                <li class="active"> 新增文章 </li>
+                <li class="active"> 更改文章 </li>
             </ul>
         </div>
         <!-- page heading end-->
@@ -30,14 +30,16 @@
                         <div class="panel-body">
                             <div class=" form">
                                 <form class="cmxform form-horizontal adminex-form" id="articleForm"
-                                      method="post" th:action="@{/article/add}" >
+                                      method="post" th:action="@{/article/update}" >
+
+                                    <input name="id" th:value="${article.id}" hidden/>
 
                                     <div class="form-group">
                                         <label for="title" class="control-label col-md-2 col-sm-2">标题:</label>
                                         <div class="col-md-8 col-sm-10">
                                             <input type="text" id="title" name="title" class="form-control"
                                                    placeholder="文章标题" minlength="1" maxlength="64" required autofocus
-                                                   th:value="${article} ? ${article.title}" />
+                                                   th:value="${article.title}" />
                                         </div>
                                     </div>
 
@@ -45,14 +47,14 @@
                                         <label for="intro" class="control-label col-md-2 col-sm-2">简介:</label>
                                         <div class="col-md-8 col-sm-10">
                                             <textarea id="intro" name="intro" class="form-control"
-                                                      placeholder="简介" th:text="${article} ? ${article.intro}"
+                                                      placeholder="简介" th:text="${article.intro}"
                                                       maxlength="1024" required></textarea>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <div id="content-editormd" class="editormd-content">
-                                            <textarea title="md编辑器" th:text="${article} ? ${article.mdcontent}"></textarea>
+                                                <textarea th:text="${article.mdcontent}"  title="md编辑器"></textarea>
                                         </div>
                                         <textarea hidden id="mdcontent" name="mdcontent"></textarea>
                                         <textarea hidden id="content" name="content"></textarea>

@@ -224,8 +224,6 @@
 
 @media screen and (max-width: 360px) {
 
-
-
     .notification-menu li:first-child .dropdown-menu {
         margin-right: -90px;
     }
@@ -253,7 +251,6 @@
     .lock-wrapper .locked {
         right: 70px;
     }
-
 
 }
 

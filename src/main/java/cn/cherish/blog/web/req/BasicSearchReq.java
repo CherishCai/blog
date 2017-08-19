@@ -1,4 +1,4 @@
-package cn.cherish.blog.web.request;
+package cn.cherish.blog.web.req;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,8 +18,8 @@ public class BasicSearchReq implements Serializable {
 	private String orderDir;
 	//startIndex=0&pageSize=10&draw=1
 	private Integer startIndex = 0;
-	private Integer pageSize = 10;
-	private String draw = "1";
+	private Integer pageSize = 20;
+	private String draw;
 
 	public Integer getPageNumber(){
         return startIndex / pageSize + 1;

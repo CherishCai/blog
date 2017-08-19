@@ -17,10 +17,14 @@ import java.util.Date;
 @CacheConfig(cacheNames = "autoresponse")
 public class AutoresponseService extends  ABaseService<Autoresponse, Long>{
 
-	@Autowired
-	private AutoresponseDAO autoresponseDao;
+	private final AutoresponseDAO autoresponseDao;
 
-	@Override
+    @Autowired
+    public AutoresponseService(AutoresponseDAO autoresponseDao) {
+        this.autoresponseDao = autoresponseDao;
+    }
+
+    @Override
 	protected IBaseDAO getEntityDAO() {
 		return autoresponseDao;
 	}
@@ -32,7 +36,7 @@ public class AutoresponseService extends  ABaseService<Autoresponse, Long>{
 
     @Transactional
     public Autoresponse save(Autoresponse newResponse) {
-        newResponse.setCreatetime(new Date());
+        newResponse.setCreatedTime(new Date());
         return autoresponseDao.save(newResponse);
     }
 

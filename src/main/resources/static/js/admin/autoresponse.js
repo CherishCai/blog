@@ -49,7 +49,7 @@
                 }, {
                     "data" : 'msgType'
 				}, {
-					"data" : 'createtime'
+					"data" : 'createdTime'
 				},
 				CONSTANT.DATA_TABLES.COLUMN.OPERATION
 				],

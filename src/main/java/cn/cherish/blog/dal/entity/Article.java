@@ -26,16 +26,25 @@ public class Article implements java.io.Serializable {
 
     @Column(name = "title", nullable = false, length = 64)
     private String title;
-
+    /**
+     * 简介
+     */
+    @Column(name = "intro", length = 1024)
+    private String intro;
+    /**
+     * html内容
+     */
     @Column(name = "content", nullable = false, columnDefinition = "text")
     private String content;
-
+    /**
+     * md内容
+     */
     @Column(name = "mdcontent", nullable = false, columnDefinition = "text")
     private String mdcontent;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="UTC")
-    @Column(name = "createtime", length = 19)
-    private Date createtime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
+    @Column(name = "created_time", length = 19)
+    private Date createdTime;
 
     @Column(name = "read_sum",nullable = false, columnDefinition = "bigint default 0")
     private Long readSum = 0L;

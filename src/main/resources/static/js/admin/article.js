@@ -14,23 +14,23 @@
 				var param = articleManage.getQueryCondition(data);
 				$.ajax({
 					type : "GET",
-					url : "/article/list",//TODO
+					url : "/article/page",//TODO
 					cache : false, //禁用缓存
 					data : param, //传入已封装的参数
 					dataType : "json",
 					success : function(result) {
 						//异常判断与处理
 						if (!result.success) {
-							alert("查询失败。错误信息：" + result.message);
+							myModalFail("查询失败。" + result.message);
 							return;
 						}
-						mdata = result.data;
+                        var pageInfo = result.data;
 						//封装返回数据，这里仅演示了修改属性名
 						var returnData = {};
 						returnData.draw = result.message;//这里直接自行返回了draw计数器,应该由后台返回
-						returnData.recordsTotal = mdata.totalElements;
-						returnData.recordsFiltered = mdata.totalElements;//后台不实现过滤功能，每次查询均视作全部结果
-						returnData.data = mdata.content;
+						returnData.recordsTotal = pageInfo.totalElements;
+						returnData.recordsFiltered = pageInfo.totalElements;//后台不实现过滤功能，每次查询均视作全部结果
+						returnData.data = pageInfo.content;
 						//调用DataTables提供的callback方法，代表数据已封装完成并传回DataTables进行渲染
 						//此时的数据需确保正确无误，异常判断应在执行此回调前自行处理完毕
 						callback(returnData);
@@ -45,7 +45,7 @@
 			    {
 					"data" : 'title'
 				}, {
-					"data" : 'createtime'
+					"data" : 'createdTime'
                 }, {
                     "data" : 'readSum',
                     "render" : function (data, type, row, meta) {
@@ -66,13 +66,7 @@
 			articleManage.fuzzySearch = false;
 			oTable.draw();
 		});
-		//重置
-		$("#btn_reset").click(function(){
-			articleManage.fuzzySearch = false;
-			$("#title").val("");
-			$("#category").val("");
-			oTable.draw();
-		});
+
 		//刷新
 		$("#btn_fresh").click(function(){
 			articleManage.fuzzySearch = false;
@@ -80,18 +74,13 @@
 		});
 		
 		// 回车键事件 
-		$("#title").keypress(function(e) {
-	        if(e.keyCode == 13) {
-	    	   $("#btn_search").click();
-	        }
-	        return;
-	    });
-		$("#category").keypress(function(e) {
-	        if(e.keyCode == 13) {
-	    	   $("#btn_search").click();
-	        }
-	        return;
-	    });
+        $("#for_search").find("input").each(function (index) {
+            $(this).keypress(function (e) {
+                if (e.keyCode === 13) {
+                    $("#btn_search").click();
+                }
+            });
+        });
 		
 	});
 
@@ -105,13 +94,7 @@
 			if (data.order && data.order.length && data.order[0]) {
 				switch (data.order[0].column) {
 				case 1:
-					param.orderColumn = "title";
-					break;
-				case 2:
-					param.orderColumn = "createtime";
-					break;
-				case 3:
-					param.orderColumn = "readSum";
+					param.orderColumn = "createdTime";
 					break;
 				default:
 					param.orderColumn = "id";
@@ -124,8 +107,14 @@
 			if (articleManage.fuzzySearch) {//模糊查询
 				param.fuzzy = $("#fuzzy-search").val();
 			} else {//非模糊查询
-				param.title = $("#title").val();
-				param.categoryId = $("#category").val();
+				// 获取input的查询条件
+                $("#for_search").find("input").each(function (index) {
+                    var val = $(this).val();
+                    if (val != null && "" != val.trim()){
+                        var name = $(this).attr("name");
+                        param[name] = val;
+                    }
+                });
 			}
 			//组装分页参数
 			param.startIndex = data.start;
@@ -140,17 +129,29 @@
     //添加操作
     $('#otable_new').on('click',function (e) {
         e.preventDefault();
-
-        window.open("/article/form");
+        var url = "/article/add";
+        window.open(url ,"_self");
     });
 
     //表格行删除操作
     $('#otable').on('click', 'a.op_delete', function (e) {
         e.preventDefault();
         var nRow = $(this).parents('tr')[0];
+        var id = oTable.row(nRow).id();
 
-        var rowData = oTable.row(nRow).data();
-        rowData.id;
+        myConfirm("你确定要删除吗?",function(){
+            //向服务器提交删除请求
+            var url = "/article/"+id;
+            var result = delAjax(url);
+
+            if(result.success){
+                myModalSuccess(result.message);
+                //删除页面中的原有行
+                oTable.row(nRow).remove().draw(false);
+            }else{
+                myModalFail(result.message);
+            }
+        });
 
     });
 
@@ -158,8 +159,8 @@
     $('#otable').on('click', 'a.op_edit', function (e) {
         e.preventDefault();
         var nRow = $(this).parents('tr')[0];
-
         var rowData = oTable.row(nRow).data();
+        var url = "/article/update/" + rowData.id;
+        window.open(url ,"_self");
 
-        window.open("/article/form/" + rowData.id);
     });

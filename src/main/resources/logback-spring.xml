@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <include resource="org/springframework/boot/logging/logback/base.xml" />
 
     <springProfile name="dev">
-        <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
             <encoder>
-                <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} [%file : %line] - %msg %n</Pattern>
+                <pattern>%cyan(%date{HH:mm:ss.SSS}) %magenta() %highlight(%-5level) %blue([%file : %line])
+                    %boldGreen(%msg%n)
+                </pattern>
             </encoder>
-            <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-                <level>TRACE</level>
-            </filter>
         </appender>
 
         <logger name="cn.cherish" level="DEBUG" />
-        <logger name="org.hibernate" level="INFO" />
+        <logger name="org.hibernate.SQL" level="INFO" />
         <logger name="org.springframework.web" level="INFO"/>
-        <logger name="org.springframework.security" level="DEBUG"/>
+        <logger name="org.springframework.security" level="INFO"/>
 
         <root level="INFO">
             <appender-ref ref="console"/>
@@ -23,7 +21,7 @@
     </springProfile>
 
     <springProfile name="prod">
-        <appender name="dailyRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <appender name="rollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
             <File>./logs/blog.log</File>
             <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
                 <!-- daily rollover -->
@@ -41,7 +39,7 @@
         <logger name="org.springframework.web" level="WARN"/>
         <logger name="org.springframework.security" level="WARN"/>
         <root level="INFO">
-            <appender-ref ref="dailyRollingFileAppender"/>
+            <appender-ref ref="rollingFile"/>
         </root>
     </springProfile>
 

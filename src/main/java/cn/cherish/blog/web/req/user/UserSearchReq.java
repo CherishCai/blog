@@ -1,4 +1,4 @@
-package cn.cherish.blog.web.request.user;
+package cn.cherish.blog.web.req.user;
 
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;

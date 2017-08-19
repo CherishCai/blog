@@ -30,9 +30,9 @@ public class Category implements java.io.Serializable{
     @Column(name = "description", nullable = false, columnDefinition = "varchar(1024)")
     private String description;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="UTC")
-    @Column(name = "createtime", length = 19)
-    private Date createtime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
+    @Column(name = "created_time", length = 19)
+    private Date createdTime;
 
     @Column(name = "parent_id")
     private Long parentId;

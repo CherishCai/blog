@@ -1,9 +1,8 @@
 package cn.cherish.blog.web;
 
-import cn.cherish.blog.web.request.BasicSearchReq;
+import cn.cherish.blog.web.req.BasicSearchReq;
 import cn.cherish.blog.dal.entity.Autoresponse;
 import cn.cherish.blog.service.AutoresponseService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
@@ -15,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.HashMap;
 import java.util.Map;
 
-@Slf4j
 @Controller
 @RequestMapping("/autoresponse")
 public class AutoresponseController extends ABaseController {
